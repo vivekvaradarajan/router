@@ -4,13 +4,13 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable }             from 'rxjs';
 import { map, take }              from 'rxjs/operators';
 
-import { Crisis, CrisisService }  from './crisis.service';
+import { Survey, CrisisService }  from './crisis.service';
 
 @Injectable()
-export class CrisisDetailResolver implements Resolve<Crisis> {
+export class CrisisDetailResolver implements Resolve<Survey> {
   constructor(private cs: CrisisService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Crisis> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Survey> {
     let id = route.paramMap.get('id');
 
     return this.cs.getCrisis(id).pipe(

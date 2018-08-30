@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { slideInDownAnimation }   from '../animations';
-import { Crisis }         from './crisis.service';
+import { Survey }         from './crisis.service';
 import { DialogService }  from '../dialog.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { DialogService }  from '../dialog.service';
   <div *ngIf="crisis">
     <h3>"{{ editName }}"</h3>
     <div>
-      <label>Id: </label>{{ crisis.id }}</div>
+      <label>Id: </label>{{ crisis.Id }}</div>
     <div>
       <label>Name: </label>
       <input [(ngModel)]="editName" placeholder="name"/>
@@ -30,7 +30,7 @@ export class CrisisDetailComponent implements OnInit {
   @HostBinding('style.display')   display = 'block';
   @HostBinding('style.position')  position = 'absolute';
 
-  crisis: Crisis;
+  crisis: Survey;
   editName: string;
 
   constructor(
@@ -41,8 +41,8 @@ export class CrisisDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.data
-      .subscribe((data: { crisis: Crisis }) => {
-        this.editName = data.crisis.name;
+      .subscribe((data: { crisis: Survey }) => {
+        this.editName = data.crisis.SurveyName;
         this.crisis = data.crisis;
       });
   }
@@ -52,13 +52,13 @@ export class CrisisDetailComponent implements OnInit {
   }
 
   save() {
-    this.crisis.name = this.editName;
+    this.crisis.SurveyName = this.editName;
     this.gotoCrises();
   }
 
   canDeactivate(): Observable<boolean> | boolean {
     // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
-    if (!this.crisis || this.crisis.name === this.editName) {
+    if (!this.crisis || this.crisis.SurveyName === this.editName) {
       return true;
     }
     // Otherwise ask the user with the dialog service and return its
@@ -67,7 +67,7 @@ export class CrisisDetailComponent implements OnInit {
   }
 
   gotoCrises() {
-    let crisisId = this.crisis ? this.crisis.id : null;
+    let crisisId = this.crisis ? this.crisis.Id : null;
     // Pass along the crisis id if available
     // so that the CrisisListComponent can select that crisis.
     // Add a totally useless `foo` parameter for kicks.
