@@ -5,14 +5,62 @@ import { map } from 'rxjs/operators';
 //   constructor(public id: number, public name: string) { }
 // }
 
+export class Response{
+  constructor(public Label:string, public Type:string,public Id:number,public UserName:string){}
+}
+export class Prompt{
+  constructor(public PromptText:string, public ResponseSet:Response[],public Id:number,public UserName:string){}
+}
+export class Section{
+  constructor(public Title:string,public Description:string,public SubTitle:string,public Order:number,public Prompts:Prompt[]){}
+}
 export class Survey {
-  constructor( public SurveyName: string, public SurveyTitle :string, public Sessions:[],public Id: number,public UserName:string) { }
+  constructor( public SurveyName: string, public SurveyTitle :string, public Sections:Section[],public Id: number,public UserName:string) { }
 }
 
 const surveys =[
- new Survey( "RISC Patient Interview",null, [],20001,null),
- new Survey("RISC Parent/Guardian Interview",null,[],20002,null),
- new Survey("RISC Provider Interview", null,[],20003,null)
+ new Survey( "RISC Patient Interview","Titallll", [
+   new Section(
+     "Patient Threat Review",
+     "For use with the patient.",
+     "Review of Threat",
+     1,
+     [new Prompt( 
+       "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+       [new Response(null,"text",50001,null)],
+       40001,
+       null
+      )
+    ]
+    )],20001,null),
+ new Survey("RISC Parent/Guardian Interview",null, [
+  new Section(
+    "Patient Threat Review",
+    "For use with the patient.",
+    "Review of Threat",
+    1,
+    [new Prompt( 
+      "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+      [new Response(null,"text",50001,null)],
+      40001,
+      null
+     )
+   ]
+   )],20002,null),
+ new Survey("RISC Provider Interview", null, [
+  new Section(
+    "Patient Threat Review",
+    "For use with the patient.",
+    "Review of Threat",
+    1,
+    [new Prompt( 
+      "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+      [new Response(null,"text",50001,null)],
+      40001,
+      null
+     )
+   ]
+   )],20003,null)
 ];
 
 // const CRISES = [

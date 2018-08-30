@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { slideInDownAnimation }   from '../animations';
-import { Survey }         from './crisis.service';
+import { Survey,Section,Response,Prompt }         from './crisis.service';
 import { DialogService }  from '../dialog.service';
 
 @Component({
@@ -15,6 +15,26 @@ import { DialogService }  from '../dialog.service';
     <div>
       <label>Name: </label>
       <input [(ngModel)]="editName" placeholder="name"/>
+{{crisis.SurveyTitle}}
+      <ul>
+      this is details
+  
+      <li *ngFor="let section of crisis.Sections">
+        <!-- <a [routerLink]="[section.Id]">
+          <span class="badge">{{ section.Id }}</span>{{ section.Title }}
+         </a>-->
+         <h2>{{section.Title}}</h2>
+        <div>
+        <ul>
+        <li *ngFor="let prompt of section.Prompts">
+          {{prompt.PromptText}}
+        </li>
+        </ul>
+        </div>
+      </li>
+    </ul>
+
+
     </div>
     <p>
       <button (click)="save()">Save</button>
@@ -32,6 +52,7 @@ export class CrisisDetailComponent implements OnInit {
 
   crisis: Survey;
   editName: string;
+  title:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +65,7 @@ export class CrisisDetailComponent implements OnInit {
       .subscribe((data: { crisis: Survey }) => {
         this.editName = data.crisis.SurveyName;
         this.crisis = data.crisis;
+        this.title = data.crisis.SurveyTitle;
       });
   }
 
