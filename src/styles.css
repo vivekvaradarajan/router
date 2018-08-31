@@ -38,19 +38,18 @@ button:disabled {
   color: #aaa;
   cursor: auto;
 }
-
+nav{
+  height:55px;
+}
 /* Navigation link styles */
 nav a {
   padding: 10px 5px;
   text-decoration: none;
-  margin-right: 50px;
+  margin-right: 20px;
   margin-top: 5px;
   display: inline-block;
   color:darkgrey;
   font-weight:600;
-}
-nav a:visited, a:link {
-  
 }
 nav a:hover {
   color:black;
@@ -71,3 +70,18 @@ nav a.active {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* .list{
+  height:20px;
+} */
+/* .list a{
+  float:left; 
+ margin-right:20px;
+}
+
+
+.list{
+  list-style:none;
+  clear:both;
+height:20px;
+}  */

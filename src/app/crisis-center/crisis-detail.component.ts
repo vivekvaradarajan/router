@@ -28,6 +28,12 @@ import { DialogService }  from '../dialog.service';
         <ul>
         <li *ngFor="let prompt of section.Prompts">
           {{prompt.PromptText}}
+          <p *ngFor="let response of prompt.ResponseSet">
+          {{response.Label}}
+          {{response.Type}}
+          {{response.Id}}
+          </p>
+        
         </li>
         </ul>
         </div>

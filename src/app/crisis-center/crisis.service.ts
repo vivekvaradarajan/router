@@ -40,7 +40,7 @@ const surveys =[
     "Review of Threat",
     1,
     [new Prompt( 
-      "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+      "What hted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
       [new Response(null,"text",50001,null)],
       40001,
       null
@@ -54,7 +54,7 @@ const surveys =[
     "Review of Threat",
     1,
     [new Prompt( 
-      "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+      "What hae others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
       [new Response(null,"text",50001,null)],
       40001,
       null
