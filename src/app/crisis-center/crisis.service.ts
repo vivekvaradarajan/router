@@ -27,12 +27,26 @@ const surveys =[
      1,
      [new Prompt( 
        "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-       [new Response(null,"text",50001,null)],
+       [new Response(null,"text",50001,null),
+       new Response("cue 1","checkbox",50002,null),
+       new Response("cue 2","checkbox",50003,null),
+       new Response("cue 3","checkbox",50003,null)
+      ],
        40001,
        null
-      )
+      ),
+      new Prompt( 
+        "What halallallarm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+        [new Response(null,"text",50001,null),
+        new Response("cue 1","checkbox",50002,null),
+        new Response("cue 2","checkbox",50003,null),
+        new Response("cue 3","checkbox",50003,null)
+       ],
+        40002,
+        null
+       )
     ]
-    )],20001,null),
+    )],10002,null),
  new Survey("RISC Parent/Guardian Interview",null, [
   new Section(
     "Patient Threat Review",
