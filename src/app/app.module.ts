@@ -16,11 +16,6 @@ import { PageNotFoundComponent }   from './not-found.component';
 
 import { DialogService }           from './dialog.service';
 
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { DynamicFormComponent } from './dynamic-form.component';
-
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -28,16 +23,13 @@ import { DynamicFormComponent } from './dynamic-form.component';
     HeroesModule,
     LoginRoutingModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
     ComposeMessageComponent,
     LoginComponent,
-    PageNotFoundComponent,
-    DynamicFormComponent
+    PageNotFoundComponent
   ],
   providers: [
     DialogService
