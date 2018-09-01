@@ -30,7 +30,7 @@ const surveys =[
        [new Response(null,"text",50001,null),
        new Response("cue 1","checkbox",50002,null),
        new Response("cue 2","checkbox",50003,null),
-       new Response("cue 3","checkbox",50003,null)
+       new Response("cue 3","checkbox",50004,null)
       ],
        40001,
        null
@@ -40,7 +40,7 @@ const surveys =[
         [new Response(null,"text",50001,null),
         new Response("cue 1","checkbox",50002,null),
         new Response("cue 2","checkbox",50003,null),
-        new Response("cue 3","checkbox",50003,null)
+        new Response("cue 3","checkbox",50004,null)
        ],
         40002,
         null
