@@ -6,6 +6,7 @@ import { slideInDownAnimation }   from '../animations';
 import { Survey,Section,Response,Prompt }         from './crisis.service';
 import { DialogService }  from '../dialog.service';
 
+import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 @Component({
   template: `
   <div *ngIf="crisis">
@@ -47,6 +48,18 @@ import { DialogService }  from '../dialog.service';
       <button (click)="cancel()">Cancel</button>
     </p>
   </div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+  <label formArrayName="orders" *ngFor="let order of form.controls.orders.controls; let i = index">
+    <input type="checkbox" [formControlName]="i">
+    {{orders[i].name}}
+  </label>
+
+  <div *ngIf="!form.valid">At least one order must be selected</div>
+  <br>
+  <button [disabled]="!form.valid">submit</button>
+</form>
+
   `,
   styles: ['input {width: 20em}'],
   animations: [ slideInDownAnimation ]
@@ -60,12 +73,32 @@ export class CrisisDetailComponent implements OnInit {
   editName: string;
   title:string;
 
+
+  form: FormGroup;
+  orders = [
+    { id: 100, name: 'order 1' },
+    { id: 200, name: 'order 2' },
+    { id: 300, name: 'order 3' },
+    { id: 400, name: 'order 4' }
+  ];
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    public dialogService: DialogService
-  ) {}
+    public dialogService: DialogService,
+    private formBuilder:FormBuilder
+  ) {
 
+    const controls = this.orders.map(c => new FormControl(false));
+    controls[0].setValue(true);
+
+    this.form = this.formBuilder.group({
+      orders: new FormArray(controls, minSelectedCheckboxes(1))
+    });
+  }
+
+  
   ngOnInit() {
     this.route.data
       .subscribe((data: { crisis: Survey }) => {
@@ -102,4 +135,27 @@ export class CrisisDetailComponent implements OnInit {
     // Relative navigation back to the crises
     this.router.navigate(['../', { id: crisisId, foo: 'foo' }], { relativeTo: this.route });
   }
+
+  submit() {
+    const selectedOrderIds = this.form.value.orders
+      .map((v, i) => v ? this.orders[i].id : null)
+      .filter(v => v !== null);
+  
+    console.log(selectedOrderIds);
+  }
+  
+}
+
+
+
+function minSelectedCheckboxes(min = 1) {
+const validator: ValidatorFn = (formArray: FormArray) => {
+  const totalSelected = formArray.controls
+    .map(control => control.value)
+    .reduce((prev, next) => next ? prev + next : prev, 0);
+
+  return totalSelected >= min ? null : { required: true };
+};
+
+return validator;
 }

@@ -1,5 +1,5 @@
 import { NgModule }       from '@angular/core';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { CommonModule }   from '@angular/common';
 
 import { CrisisService }        from './crisis.service';
@@ -15,7 +15,8 @@ import { CrisisCenterRoutingModule } from './crisis-center-routing.module';
   imports: [
     CommonModule,
     FormsModule,
-    CrisisCenterRoutingModule
+    CrisisCenterRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     CrisisCenterComponent,
