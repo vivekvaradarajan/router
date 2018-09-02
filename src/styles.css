@@ -71,17 +71,20 @@ nav a.active {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* .list{
-  height:20px;
-} */
-/* .list a{
-  float:left; 
- margin-right:20px;
+.questions{
+  list-style:none;
+  padding:0;
+}
+.q input[type='checkbox']{
+width:15px;
+}
+.q input[type='text']{
+  width:600px;
 }
 
-
-.list{
-  list-style:none;
-  clear:both;
-height:20px;
-}  */
+/* .q-p{
+  width:600px;
+}
+.q-t>input{
+  width:600px;
+} */

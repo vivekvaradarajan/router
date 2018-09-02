@@ -1,38 +1,25 @@
 <div *ngIf="crisis">
-    <h3>"{{ editName }}"</h3>
-    <div>
-      <label>Id: </label>{{ crisis.Id }}
-    </div>
-    <div>
-      <label>Name: </label>
-      <input [(ngModel)]="editName" placeholder="name"/>
-            {{crisis.SurveyTitle}}
-      <ul>
-        this is details
+      <ul class="questions">
         <li *ngFor="let section of crisis.Sections">
-        <!-- <a [routerLink]="[section.Id]">
-          <span class="badge">{{ section.Id }}</span>{{ section.Title }}
-         </a>-->
         <h2>{{section.Title}}</h2>              
         <div>
-            <ul>
+            <ol>
                 <li *ngFor="let prompt of section.Prompts">
                     <p>{{prompt.PromptText }}  </p>
                     <div *ngFor="let response of prompt.ResponseSet">
-                        <div *ngIf="response.Type == 'text'">
+                        <div class="q" *ngIf="response.Type == 'text'">
                             <input type="text" [(ngModel)]="prompt.PrompText" placeholder="" />
                         </div>
-                        <div *ngIf="response.Type == 'checkbox'">
+                        <div class="q" *ngIf="response.Type == 'checkbox'">
                             <input type="checkbox"  [(ngModel)]="response.Id"  />
                             <label>{{response.Label}}</label>
                         </div>
                     </div>
                 </li>
-            </ul>
+            </ol>
         </div>
     </li>
     </ul>
-        
-</div>
+
 </div>
 
