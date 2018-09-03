@@ -1,9 +1,10 @@
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {SurveyAnswer} from './SurveyAnswer';
 
-// export class Crisis {
-//   constructor(public id: number, public name: string) { }
-// }
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+ 
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 export class Response{
   constructor(public Label:string, public Type:string,public Id:number,public UserName:string){}
@@ -17,6 +18,9 @@ export class Section{
 export class Survey {
   constructor( public SurveyName: string, public SurveyTitle :string, public Sections:Section[],public Id: number,public UserName:string) { }
 }
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 const surveys =[
  new Survey( "RISC Patient Interview","Titallll", [
@@ -37,16 +41,43 @@ const surveys =[
       ),
       new Prompt( 
         "What halallallarm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-        [new Response(null,"text",50001,null),
-        new Response("cue 1","checkbox",50002,null),
-        new Response("cue 2","checkbox",50003,null),
-        new Response("cue 3","checkbox",50004,null)
+        [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
        ],
         40002,
         null
        )
     ]
-    )],10002,null),
+    ),
+    new Section(
+      "Patient Threat Review",
+      "For use with the patient.",
+      "Review of Threat",
+      1,
+      [new Prompt( 
+        "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+        [new Response(null,"text",70001,null),
+        new Response("cue 1","checkbox",70002,null),
+        new Response("cue 2","checkbox",70003,null),
+        new Response("cue 3","checkbox",70004,null)
+       ],
+        40003,
+        null
+       ),
+       new Prompt( 
+         "What halallallarm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+         [new Response(null,"text",80001,null),
+         new Response("cue 1","checkbox",80002,null),
+         new Response("cue 2","checkbox",80003,null),
+         new Response("cue 3","checkbox",80004,null)
+        ],
+         40004,
+         null
+        )
+     ]
+     )],10002,null),
  new Survey("RISC Parent/Guardian Interview",null, [
   new Section(
     "Patient Threat Review",
@@ -55,8 +86,8 @@ const surveys =[
     1,
     [new Prompt( 
       "What hted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-      [new Response(null,"text",50001,null)],
-      40001,
+      [new Response(null,"text",90001,null)],
+      40005,
       null
      )
    ]
@@ -69,26 +100,23 @@ const surveys =[
     1,
     [new Prompt( 
       "What hae others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-      [new Response(null,"text",50001,null)],
-      40001,
+      [new Response(null,"text",40001,null)],
+      40006,
       null
      )
    ]
    )],20003,null)
 ];
 
-// const CRISES = [
-//   new Crisis(1, 'Dragon Burning Cities'),
-//   new Crisis(2, 'Sky Rains Great White Sharks'),
-//   new Crisis(3, 'Giant Asteroid Heading For Earth'),
-//   new Crisis(4, 'Procrastinators Meeting Delayed Again'),
-// ];
-
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 
 
 @Injectable()
 export class CrisisService {
+  private surveyUrl = 'api/surveys';  // URL to web api
+  
+  constructor(
+    private http: HttpClient) { }
   static nextCrisisId = 100;
   // private crises$: BehaviorSubject<Crisis[]> = new BehaviorSubject<Crisis[]>(CRISES);
   private surveys$: BehaviorSubject<Survey[]> = new BehaviorSubject<Survey[]>(surveys);
@@ -101,6 +129,13 @@ export class CrisisService {
     );
   }
 
+  saveAnswer (surveyAnswer:SurveyAnswer): Observable<any> {
+    console.log(surveyAnswer);
+    return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
+      tap(_ => this.log(`updated SurveyAnswer id=${surveyAnswer.SurveyId}`)),
+      catchError(this.handleError<any>('updatequestionnaire'))
+    );
+  }
   // addCrisis(name: string) {
   //   name = name.trim();
   //   if (name) {
@@ -109,4 +144,24 @@ export class CrisisService {
   //     this.crises$.next(CRISES);
   //   }
   // }
+  private log(message: string) {
+    console.log('${message}');
+   // this.messageService.add(`questionnaireService: ${message}`);
+  }
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+ 
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+ 
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+ 
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+ 
 }
+
+

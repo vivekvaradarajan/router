@@ -1,17 +1,17 @@
 <div *ngIf="crisis">
       <ul class="questions">
-        <li *ngFor="let section of crisis.Sections">
+        <li *ngFor="let section of crisis.Sections;let i = index;">
         <h2>{{section.Title}}</h2>              
         <div>
             <ol>
-                <li *ngFor="let prompt of section.Prompts">
+                <li *ngFor="let prompt of section.Prompts;let j = index;">
                     <p>{{prompt.PromptText }}  </p>
-                    <div *ngFor="let response of prompt.ResponseSet">
+                    <div *ngFor="let response of prompt.ResponseSet;let k=index;">               
                         <div class="q" *ngIf="response.Type == 'text'">
-                            <input type="text" [(ngModel)]="prompt.PrompText" placeholder="" />
+                            <input type="text" [(ngModel)]="surveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value" placeholder="" />
                         </div>
                         <div class="q" *ngIf="response.Type == 'checkbox'">
-                            <input type="checkbox"  [(ngModel)]="response.Id"  />
+                            <input type="checkbox"  [(ngModel)]="surveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value"  />
                             <label>{{response.Label}}</label>
                         </div>
                     </div>
@@ -20,6 +20,7 @@
         </div>
     </li>
     </ul>
-
+    
+    <button (click)="saveAnswer()">save</button>
 </div>
 

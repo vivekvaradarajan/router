@@ -1,6 +1,8 @@
 import { NgModule }       from '@angular/core';
 import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { CommonModule }   from '@angular/common';
+import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
 import { CrisisService }        from './crisis.service';
 

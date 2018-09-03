@@ -1,12 +1,16 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding ,Input,Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { slideInDownAnimation }   from '../animations';
-import { Survey,Section,Response,Prompt }         from './crisis.service';
+import { Survey, Section}         from './crisis.service';
 import { DialogService }  from '../dialog.service';
 
+import {CrisisService} from './crisis.service';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+import { SurveyAnswer } from './SurveyAnswer';
+import { SectionAnswer } from './SectionAnswer';
+import { Location } from '@angular/common';
 @Component({
   templateUrl:'./crisis-detail.component.html',
   styles: ['input {width: 20em}'],
@@ -20,43 +24,17 @@ export class CrisisDetailComponent implements OnInit {
   crisis: Survey;
   editName: string;
   title:string;
-
-
-  form: FormGroup;
-  // orders = [
-  //   { id: 50002, name: 'order 1' },
-  //   { id: 50003, name: 'order 2' },
-  //   { id: 50004, name: 'order 3' }
-  // ];
-//Label, Type, Id
-  orders=[new Response("cue 1","checkbox",50002,null),
-  new Response("cue 2","checkbox",50003,null),
-  new Response("cue 3","checkbox",50004,null)
- ];
+  surveyAnswer:SurveyAnswer;
+   
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     public dialogService: DialogService,
-    private formBuilder:FormBuilder
+    private crisisService: CrisisService,
+    private formBuilder:FormBuilder,
+    private location:Location
   ) {
-
-    const controls = this.orders.map(c => new FormControl(false));
-    // controls[0].setValue(true);
-
-
-    this.form = this.formBuilder.group({
-      orders: new FormArray(controls, minSelectedCheckboxes(1))
-    });
-  }
-
-  
-  submit() {
-    const selectedOrderIds = this.form.value.orders
-      .map((v, i) => v ? this.orders[i].Id : null)
-      .filter(v => v !== null);
-  
-    console.log(selectedOrderIds);
   }
   
   ngOnInit() {
@@ -65,7 +43,33 @@ export class CrisisDetailComponent implements OnInit {
         this.editName = data.crisis.SurveyName;
         this.crisis = data.crisis;
         this.title = data.crisis.SurveyTitle;
+       
       });
+
+      let sectionAnswers=[];
+
+      for (let i = 0; i < this.crisis.Sections.length; i++) {
+        let answers= [];
+        console.log(this.crisis.Sections[i].Prompts.length);
+        for(let j=0;j<this.crisis.Sections[i].Prompts.length;j++){
+          let controls=[];
+          for(let k=0;k<this.crisis.Sections[i].Prompts[j].ResponseSet.length;k++){
+            let control = {ControlId:this.crisis.Sections[i].Prompts[j].ResponseSet[k].Id};
+           controls.push(control);
+          }
+
+          let answer = {QuestionId:this.crisis.Sections[i].Prompts[j].Id,Controls:controls};
+          answers.push(answer);          
+        }
+        let sectionAnswer={SectionTitle:this.crisis.Sections[i].SubTitle,Answers:answers};
+
+        sectionAnswers.push(sectionAnswer);
+      }
+      
+      this.surveyAnswer =  {
+        SurveyId:this.crisis.Id,
+        SectionAnswers:sectionAnswers
+      };   
   }
 
   cancel() {
@@ -76,6 +80,16 @@ export class CrisisDetailComponent implements OnInit {
     this.crisis.SurveyName = this.editName;
     this.gotoCrises();
   }
+
+  saveAnswer(): void {
+    console.log(this.surveyAnswer);
+    // this.crisisService.saveAnswer(this.surveyAnswer)
+    //   .subscribe(() => this.goBack());
+  }
+  goBack(): void {
+    console.log("go back");
+  }
+  
 
   canDeactivate(): Observable<boolean> | boolean {
     // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
@@ -95,20 +109,4 @@ export class CrisisDetailComponent implements OnInit {
     // Relative navigation back to the crises
     this.router.navigate(['../', { id: crisisId, foo: 'foo' }], { relativeTo: this.route });
   }
-
-  
-}
-
-
-
-function minSelectedCheckboxes(min = 1) {
-const validator: ValidatorFn = (formArray: FormArray) => {
-  const totalSelected = formArray.controls
-    .map(control => control.value)
-    .reduce((prev, next) => next ? prev + next : prev, 0);
-
-  return totalSelected >= min ? null : { required: true };
-};
-
-return validator;
 }
