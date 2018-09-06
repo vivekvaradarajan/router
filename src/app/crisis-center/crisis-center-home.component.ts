@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   template: `
-    <p>Welcome to the Crisis Center</p>
+    <p>Click on the questionnairie you want to fill.</p>
   `
 })
 export class CrisisCenterHomeComponent { }
