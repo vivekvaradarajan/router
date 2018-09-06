@@ -25,7 +25,7 @@ const httpOptions = {
 const surveys =[
  new Survey( "RISC Patient Interview","Titallll", [
    new Section(
-     "Patient Threat Review",
+     "Patient Threat Review Section I",
      "For use with the patient.",
      "Review of Threat",
      1,
@@ -52,7 +52,7 @@ const surveys =[
     ]
     ),
     new Section(
-      "Patient Threat Review",
+      "Patient Threat Review Section II",
       "For use with the patient.",
       "Review of Threat",
       1,

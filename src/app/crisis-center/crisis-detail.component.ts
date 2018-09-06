@@ -19,7 +19,6 @@ import { Location } from '@angular/common';
 export class CrisisDetailComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display')   display = 'block';
-  @HostBinding('style.position')  position = 'absolute';
 
   crisis: Survey;
   editName: string;

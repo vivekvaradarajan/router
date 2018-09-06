@@ -7,7 +7,7 @@ import { switchMap }             from 'rxjs/operators';
 
 @Component({
   template: `
-    <nav >
+    <nav class="sub-menu" >
       <a *ngFor="let crisis of surveys$ | async" [routerLink]="[crisis.Id]" [class.selected]="crisis.Id === selectedId" routerLinkActive="active">{{crisis.SurveyName}}</a>
     </nav>
 

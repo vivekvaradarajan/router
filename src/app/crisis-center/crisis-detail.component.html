@@ -3,8 +3,9 @@
         <li *ngFor="let section of crisis.Sections;let i = index;">
         <h2>{{section.Title}}</h2>              
         <div>
-            <ol>
+            <ul >
                 <li *ngFor="let prompt of section.Prompts;let j = index;">
+                    <h3>Question {{j +1}}:</h3>
                     <p>{{prompt.PromptText }}  </p>
                     <div *ngFor="let response of prompt.ResponseSet;let k=index;">               
                         <div class="q" *ngIf="response.Type == 'text'">
@@ -16,7 +17,7 @@
                         </div>
                     </div>
                 </li>
-            </ol>
+            </ul>
         </div>
     </li>
     </ul>
