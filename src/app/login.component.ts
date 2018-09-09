@@ -5,8 +5,12 @@ import { AuthService }      from './auth.service';
 
 @Component({
   template: `
-    <h2>Analytics</h2>
-    `
+    <h2>LOGIN</h2>
+    <p>{{message}}</p>
+    <p>
+      <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
+      <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+    </p>`
 })
 export class LoginComponent {
   message: string;
