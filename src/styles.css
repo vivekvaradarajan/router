@@ -88,7 +88,7 @@ width:15px;
 }
 .q input[type='text']{
   display: block;
-    width: 80%;
+    width: 90%;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -124,4 +124,13 @@ body{
   -webkit-box-shadow: -4px 11px 34px -5px lightgrey;
 -moz-box-shadow: -4px 11px 34px -5px lightgrey;
 box-shadow: -4px 11px 34px -5px lightgrey;
+}
+.checkbox{
+  width:80px;
+}
+.checkboxgroup{
+  float:left;
+}
+.textbox{
+  float:left;
 }
