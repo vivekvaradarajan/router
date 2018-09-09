@@ -82,6 +82,10 @@ export class CrisisDetailComponent implements OnInit {
 
   saveAnswer(): void {
     console.log(this.surveyAnswer);
+
+      let surveyId = this.surveyAnswer.SurveyId;
+      this.router.navigate(['/hero/{id}', { id: surveyId, foo: 'foo' }]); 
+
     // this.crisisService.saveAnswer(this.surveyAnswer)
     //   .subscribe(() => this.goBack());
   }

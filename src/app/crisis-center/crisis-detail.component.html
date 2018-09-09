@@ -27,11 +27,16 @@
                 </div>                 
                 </li>
             </ul>
+
         </div>
     </div>
     </li>
     </ul>
     
+    <a [routerLink]="['/hero', surveyAnswer.SurveyId]">
+        <span class="badge">{{ surveyAnswer.SurveyId }}</span>This Survey
+      </a>
+
     <button (click)="saveAnswer()">save</button>
 </div>
 
