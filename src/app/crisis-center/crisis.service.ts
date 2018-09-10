@@ -1,5 +1,8 @@
 import { BehaviorSubject } from 'rxjs';
 import {SurveyAnswer} from './SurveyAnswer';
+import {SectionAnswer} from './SectionAnswer';
+import {Answer} from './Answer';
+import{Control} from './Control';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
  
@@ -107,6 +110,13 @@ const surveys =[
    ]
    )],20003,null)
 ];
+
+
+const Answers =[
+  new SurveyAnswer(10002,
+    [new SectionAnswer("fsdfsdf",[new Answer(435,[new Control(324,"fsdfs")])])]
+  )
+  ];
 
 import { Injectable, Input } from '@angular/core';
 
