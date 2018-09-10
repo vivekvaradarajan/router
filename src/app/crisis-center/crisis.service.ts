@@ -113,12 +113,13 @@ const surveys =[
 
 
 const Answers =[
-  new SurveyAnswer(10002,
+  new SurveyAnswer(6662,
     [new SectionAnswer("fsdfsdf",[new Answer(435,[new Control(324,"fsdfs")])])]
   )
   ];
 
 import { Injectable, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -126,12 +127,18 @@ export class CrisisService {
   private surveyUrl = 'api/surveys';  // URL to web api
   
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient, private router: Router) { }
   static nextCrisisId = 100;
   // private crises$: BehaviorSubject<Crisis[]> = new BehaviorSubject<Crisis[]>(CRISES);
   private surveys$: BehaviorSubject<Survey[]> = new BehaviorSubject<Survey[]>(surveys);
+  private answers$:BehaviorSubject<SurveyAnswer[]> = new BehaviorSubject<SurveyAnswer[]>(Answers);
 
   getCrises() { return this.surveys$; }
+
+  getAnswers() {
+    console.log(this.answers$);
+    return this.answers$;
+  }
 
   getCrisis(id: number | string) {
     return this.getCrises().pipe(
@@ -139,12 +146,16 @@ export class CrisisService {
     );
   }
 
-  saveAnswer (surveyAnswer:SurveyAnswer): Observable<any> {
+  saveAnswer (surveyAnswer:SurveyAnswer){
     console.log(surveyAnswer);
-    return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
-      tap(_ => this.log(`updated SurveyAnswer id=${surveyAnswer.SurveyId}`)),
-      catchError(this.handleError<any>('updatequestionnaire'))
-    );
+    Answers.push(surveyAnswer);
+
+    this.router.navigateByUrl('crisis-center/'); 
+
+    // return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
+    //   tap(_ => this.log(`updated SurveyAnswer id=${surveyAnswer.SurveyId}`)),
+    //   catchError(this.handleError<any>('updatequestionnaire'))
+    // );
   }
   // addCrisis(name: string) {
   //   name = name.trim();
