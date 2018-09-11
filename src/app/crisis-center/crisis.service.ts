@@ -150,7 +150,7 @@ export class CrisisService {
     console.log(surveyAnswer);
     Answers.push(surveyAnswer);
 
-    this.router.navigateByUrl('crisis-center/'); 
+    this.router.navigateByUrl('crisis-center/haa/'+surveyAnswer.SurveyId); 
 
     // return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
     //   tap(_ => this.log(`updated SurveyAnswer id=${surveyAnswer.SurveyId}`)),

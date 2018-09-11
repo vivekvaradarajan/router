@@ -11,6 +11,10 @@ import { CrisisDetailResolver }   from './crisis-detail-resolver.service';
 
 const crisisCenterRoutes: Routes = [
   {
+    path: 'haa/:id',
+    component:CrisisCenterHomeComponent
+  },
+  {
     path: '',
     component: CrisisCenterComponent,
     children: [
@@ -25,10 +29,6 @@ const crisisCenterRoutes: Routes = [
             resolve: {
               crisis: CrisisDetailResolver
             }
-          },
-          {
-            path: '',
-            component: CrisisCenterHomeComponent
           }
         ]
       }
