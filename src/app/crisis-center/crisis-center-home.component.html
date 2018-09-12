@@ -1,7 +1,8 @@
 <p>{{survey.SurveyName}}</p>
-
   <ul>
   <li *ngFor="let answer of answers">
+     
+    <div *ngIf="answer.SurveyId == selectedId">
     <div *ngFor="let sectionAnswer of answer.SectionAnswers;let i = index;">
       <p>{{sectionAnswer.SectionTitle}}</p>
       <ul *ngFor="let a of sectionAnswer.Answers;let j = index;">
@@ -25,5 +26,6 @@
     </ul>
 
     </div>
+</div>
   </li>
   </ul>
