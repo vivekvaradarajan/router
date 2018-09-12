@@ -26,7 +26,7 @@ const httpOptions = {
 };
 
 const surveys =[
- new Survey( "RISC Patient Interview","Titallll", [
+ new Survey( "RISC Patient Interview","", [
    new Section(
      "Patient Threat Review",
      "For use with the patient.",
@@ -87,28 +87,116 @@ const surveys =[
      ],10002,null),
  new Survey("RISC Parent/Guardian Interview",null, [
   new Section(
-    "Patient Threat Review",
-    "For use with the patient.",
-    "Review of Threat",
-    1,
+    "Parent/Guardian Threat Review",
+    "For use with parents and guardians of a patient.",
+    "Review of Knowledge of Threat",
+    2,
     [new Prompt( 
-      "What hted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-      [new Response(null,"text",90001,null)],
-      40005,
+      "What do you know about the threat the patient made or what happened at that time?" ,
+      [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
+       ],
+      40008,
+      null
+     ),
+     new Prompt( 
+      "Have you heard the patient say similar things or behave in similar ways before? Do you have any ideas about what reasons they may have had to say or do what they did? Do you recall the patient doing or saying anything prior to this event that indicated that they felt this way or wanted to harm [intended victim]?" ,
+      [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
+       ],
+      40009,
+      null
+     ),
+     new Prompt( 
+      "Are you familiar with [the intended victim]? What do you know about the patient’s relationship with them?" ,
+      [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
+       ],
+      40010,
+      null
+     ),
+     new Prompt( 
+      "Does the patient have the means to carry out the threat (access to firearms)?" ,
+      [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
+       ],
+      40011,
+      null
+     ),
+     new Prompt( 
+      "Is there anyone else (providers, teachers, peers) who might know about this?" ,
+      [new Response(null,"text",60001,null),
+      new Response("cue 1","checkbox",60002,null),
+      new Response("cue 2","checkbox",60003,null),
+      new Response("cue 3","checkbox",60004,null)
+     ],
+      40008,
       null
      )
    ]
    )],20002,null),
  new Survey("RISC Provider Interview", null, [
   new Section(
-    "Patient Threat Review",
-    "For use with the patient.",
-    "Review of Threat",
-    1,
+    "Provider Threat Review",
+    "For use with other providers of a patient.",
+    "Review of Knowledge of Threat",
+    3,
     [new Prompt( 
-      "What hae others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-      [new Response(null,"text",40001,null)],
-      40006,
+      "Role" ,
+      [new Response(null,"text",60001,null),
+      new Response("cue 1","checkbox",60002,null),
+      new Response("cue 2","checkbox",60003,null),
+      new Response("cue 3","checkbox",60004,null)
+     ],
+      40014,
+      null
+     ),
+     new Prompt( 
+      "Length of treatment" ,
+      [new Response(null,"text",60001,null),
+      new Response("cue 1","checkbox",60002,null),
+      new Response("cue 2","checkbox",60003,null),
+      new Response("cue 3","checkbox",60004,null)
+     ],
+      40015,
+      null
+     ),
+     new Prompt( 
+      "What do you know about the threat the patient made or what happened at that time?" ,
+      [new Response(null,"text",60001,null),
+      new Response("cue 1","checkbox",60002,null),
+      new Response("cue 2","checkbox",60003,null),
+      new Response("cue 3","checkbox",60004,null)
+     ],
+      40016,
+      null
+     ),
+     new Prompt( 
+      "Have you heard the patient say similar things or behave in similar ways before? Do you have any ideas about what reasons they may have had to say or do what they did? Do you recall the patient doing or saying anything prior to this event that indicated that they felt this way or wanted to harm [intended victim]?" ,
+      [new Response(null,"text",60001,null),
+      new Response("cue 1","checkbox",60002,null),
+      new Response("cue 2","checkbox",60003,null),
+      new Response("cue 3","checkbox",60004,null)
+     ],
+      40017,
+      null
+     ),
+     new Prompt( 
+      "Relationship with Specific Intended Victim(s): How long have you known them? What has happened in the past between you? What do you think they deserve? Do you see any way things could be changed/improved?" ,
+      [new Response(null,"text",60001,null),
+      new Response("cue 1","checkbox",60002,null),
+      new Response("cue 2","checkbox",60003,null),
+      new Response("cue 3","checkbox",60004,null)
+     ],
+      40018,
       null
      )
    ]

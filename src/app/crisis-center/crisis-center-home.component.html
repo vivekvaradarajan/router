@@ -6,14 +6,14 @@
       <p>{{sectionAnswer.SectionTitle}}</p>
       <ul *ngFor="let a of sectionAnswer.Answers;let j = index;">
         <li>
-            {{survey.Sections[i].Prompts[j].PromptText}}
+            <p>{{survey.Sections[i].Prompts[j].PromptText}}</p>
             <ul *ngFor="let c of a.Controls;let k = index;">
                     <li>
                         <div  *ngIf="survey.Sections[i].Prompts[j].ResponseSet[k].Type=='text'">
-                            {{c.Value}}
+                            <h3>{{c.Value}}</h3>
                         </div>
                         <div *ngIf="survey.Sections[i].Prompts[j].ResponseSet[k].Type=='checkbox'">
-                                {{survey.Sections[i].Prompts[j].ResponseSet[k].Label}} : {{c.Value}}
+                                {{survey.Sections[i].Prompts[j].ResponseSet[k].Label}} : <span style="font-weight:bold;" *ngIf="c.Value==true">checked </span>
                         </div>
                             
 

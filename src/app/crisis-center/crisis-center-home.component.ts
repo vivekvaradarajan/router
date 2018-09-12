@@ -1,7 +1,7 @@
 
 
 import { Component, OnInit }        from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap,Router,NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 
 import { Survey, CrisisService } from './crisis.service';
 import { Observable }            from 'rxjs';
@@ -25,8 +25,16 @@ export class CrisisCenterHomeComponent implements OnInit {
 
   constructor(
     private service: CrisisService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+
+    router.events.forEach((event) => {
+      if(event instanceof NavigationStart) {
+        this.answers=[];
+      }
+    });
+  }
 
   ngOnInit() {
    this.route.paramMap.pipe(

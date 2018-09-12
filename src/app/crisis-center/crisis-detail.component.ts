@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding ,Input,Output} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router,NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized  } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { slideInDownAnimation }   from '../animations';
@@ -34,9 +34,18 @@ export class CrisisDetailComponent implements OnInit {
     private formBuilder:FormBuilder,
     private location:Location
   ) {
+    router.events.forEach((event) => {
+      if(event instanceof RoutesRecognized) {
+        this.createSurveyAnswer();
+      }
+    });
   }
   
   ngOnInit() {
+      this.createSurveyAnswer();
+  }
+  createSurveyAnswer(){
+    this.surveyAnswer = null;
     this.route.data
       .subscribe((data: { crisis: Survey }) => {
         this.editName = data.crisis.SurveyName;
@@ -68,9 +77,8 @@ export class CrisisDetailComponent implements OnInit {
       this.surveyAnswer =  {
         SurveyId:this.crisis.Id,
         SectionAnswers:sectionAnswers
-      };   
+      }; 
   }
-
   cancel() {
     this.gotoCrises();
   }
