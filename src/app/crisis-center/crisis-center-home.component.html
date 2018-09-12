@@ -1,0 +1,29 @@
+<p>{{survey.SurveyName}}</p>
+
+  <ul>
+  <li *ngFor="let answer of answers">
+    <div *ngFor="let sectionAnswer of answer.SectionAnswers;let i = index;">
+      <p>{{sectionAnswer.SectionTitle}}</p>
+      <ul *ngFor="let a of sectionAnswer.Answers;let j = index;">
+        <li>
+            {{survey.Sections[i].Prompts[j].PromptText}}
+            <ul *ngFor="let c of a.Controls;let k = index;">
+                    <li>
+                        <div  *ngIf="survey.Sections[i].Prompts[j].ResponseSet[k].Type=='text'">
+                            {{c.Value}}
+                        </div>
+                        <div *ngIf="survey.Sections[i].Prompts[j].ResponseSet[k].Type=='checkbox'">
+                                {{survey.Sections[i].Prompts[j].ResponseSet[k].Label}} : {{c.Value}}
+                        </div>
+                            
+
+                    </li>
+
+                </ul>
+        </li>
+        <br/>
+    </ul>
+
+    </div>
+  </li>
+  </ul>

@@ -28,7 +28,7 @@ const httpOptions = {
 const surveys =[
  new Survey( "RISC Patient Interview","Titallll", [
    new Section(
-     "Patient Threat Review Section I",
+     "Patient Threat Review",
      "For use with the patient.",
      "Review of Threat",
      1,
@@ -43,7 +43,7 @@ const surveys =[
        null
       ),
       new Prompt( 
-        "What halallallarm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
+        "Usually people have some reasons that made them say or do something like that. What happened that led up to the point where you [made that threat, said what you said, acted like you did]?" ,
         [new Response(null,"text",60001,null),
         new Response("cue 1","checkbox",60002,null),
         new Response("cue 2","checkbox",60003,null),
@@ -51,36 +51,40 @@ const surveys =[
        ],
         40002,
         null
-       )
-    ]
-    ),
-    new Section(
-      "Patient Threat Review Section II",
-      "For use with the patient.",
-      "Review of Threat",
-      1,
-      [new Prompt( 
-        "What happened that made others concerned that you wanted to harm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-        [new Response(null,"text",70001,null),
-        new Response("cue 1","checkbox",70002,null),
-        new Response("cue 2","checkbox",70003,null),
-        new Response("cue 3","checkbox",70004,null)
+       ),
+       new Prompt( 
+        "If you had the chance, or had actually done what you said you were going to do, how would you have done it? Did you have a plan, or an idea, or imagine how you would hurt [threatened person]?" ,
+        [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
        ],
         40003,
         null
        ),
        new Prompt( 
-         "What halallallarm someone? Did you say anything or do anything that prompted that worry? What did you say [exact wording] or do? What did you mean by that?" ,
-         [new Response(null,"text",80001,null),
-         new Response("cue 1","checkbox",80002,null),
-         new Response("cue 2","checkbox",80003,null),
-         new Response("cue 3","checkbox",80004,null)
-        ],
-         40004,
-         null
-        )
-     ]
-     )],10002,null),
+        "Do you still want to hurt [threatened person]? Is there anything that could happen or that anyone might do that would make you feel like carrying out your threat now? If you could do it or did it, how do you think you would feel afterwards?" ,
+        [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
+       ],
+        40004,
+        null
+       ),
+       new Prompt( 
+        "What would happen to you if you did it? What about your family, friends, etc.? What would happen to them (threatened person)? What would happen to their family and friends?" ,
+        [new Response(null,"text",60001,null),
+        new Response("cue 1","checkbox",60002,null),
+        new Response("cue 2","checkbox",60003,null),
+        new Response("cue 3","checkbox",60004,null)
+       ],
+        40005,
+        null
+       )
+    ]
+    )
+     ],10002,null),
  new Survey("RISC Parent/Guardian Interview",null, [
   new Section(
     "Patient Threat Review",
@@ -113,9 +117,9 @@ const surveys =[
 
 
 const Answers =[
-  new SurveyAnswer(6662,
-    [new SectionAnswer("fsdfsdf",[new Answer(435,[new Control(324,"fsdfs")])])]
-  )
+  // new SurveyAnswer(6662,
+  //   [new SectionAnswer("fsdfsdf",[new Answer(435,[new Control(324,"fsdfs")])])]
+  // )
   ];
 
 import { Injectable, Input } from '@angular/core';

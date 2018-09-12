@@ -12,26 +12,7 @@ import {SurveyAnswer} from './SurveyAnswer';
 
 
 @Component({
-  template: `
-    <p>Welcome to the Crisis Center</p>
-    <ul>
-    <li *ngFor="let answer of answers">
-    {{answer.SurveyId}}
-      <div *ngFor="let sectionAnswer of answer.SectionAnswers">
-        <p>{{sectionAnswer.SectionTitle}}</p>
-      </div>
-    </li>
-    </ul>
-
-Survey: {{survey}}
-Selected ID: {{selectedId}}
- <ul>
-  <li *ngFor="let survey of surveys$ | async">
-    {{survey.SurveyName}}
-  </li>
- </ul>
-
-  `
+  templateUrl:'./crisis-center-home.component.html',
 })
 
 
