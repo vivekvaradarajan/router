@@ -20,12 +20,12 @@ const appRoutes: Routes = [
     canLoad: [AuthGuard]
   },
   {
-    path: 'crisis-center',
-    loadChildren: 'app/crisis-center/crisis-center.module#CrisisCenterModule',
+    path: 'survey-center',
+    loadChildren: 'app/survey-center/survey-center.module#surveyCenterModule',
     data: { preload: true }
   },
-  { path: '',   redirectTo: '/crisis-center/10002', pathMatch: 'full' },
- // {path:'crisis-center', redirectTo:'crisis-center/10002'},
+  { path: '',   redirectTo: '/survey-center/10002', pathMatch: 'full' },
+ // {path:'survey-center', redirectTo:'survey-center/10002'},
   { path: '**', component: PageNotFoundComponent }
 ];
 

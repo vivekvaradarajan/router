@@ -1,4 +1,4 @@
-// TODO: Feature Componetized like CrisisCenter
+// TODO: Feature Componetized like surveyCenter
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';

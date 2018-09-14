@@ -4,22 +4,22 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable }             from 'rxjs';
 import { map, take }              from 'rxjs/operators';
 
-import { Survey, CrisisService }  from './crisis.service';
+import { Survey, surveyService }  from './survey.service';
 
 @Injectable()
-export class CrisisDetailResolver implements Resolve<Survey> {
-  constructor(private cs: CrisisService, private router: Router) {}
+export class surveyDetailResolver implements Resolve<Survey> {
+  constructor(private cs: surveyService, private router: Router) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Survey> {
     let id = route.paramMap.get('id');
 
-    return this.cs.getCrisis(id).pipe(
+    return this.cs.getsurvey(id).pipe(
       take(1),
-      map(crisis => {
-        if (crisis) {
-          return crisis;
+      map(survey => {
+        if (survey) {
+          return survey;
         } else { // id not found
-          this.router.navigate(['/crisis-center']);
+          this.router.navigate(['/survey-center']);
           return null;
         }
       })

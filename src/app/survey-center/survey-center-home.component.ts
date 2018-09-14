@@ -3,7 +3,7 @@
 import { Component, OnInit }        from '@angular/core';
 import { ActivatedRoute, ParamMap,Router,NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 
-import { Survey, CrisisService } from './crisis.service';
+import { Survey, surveyService } from './survey.service';
 import { Observable }            from 'rxjs';
 import { switchMap }             from 'rxjs/operators';
 import {SurveyAnswer} from './SurveyAnswer';
@@ -12,11 +12,11 @@ import {SurveyAnswer} from './SurveyAnswer';
 
 
 @Component({
-  templateUrl:'./crisis-center-home.component.html',
+  templateUrl:'./survey-center-home.component.html',
 })
 
 
-export class CrisisCenterHomeComponent implements OnInit {
+export class surveyCenterHomeComponent implements OnInit {
   answers: SurveyAnswer[];
   surveys:Survey[];
   survey:Survey;
@@ -24,7 +24,7 @@ export class CrisisCenterHomeComponent implements OnInit {
   selectedId: number;
 
   constructor(
-    private service: CrisisService,
+    private service: surveyService,
     private route: ActivatedRoute,
     private router: Router
   ) {

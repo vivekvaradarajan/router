@@ -5,14 +5,14 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
-import { CrisisService }        from './crisis.service';
+import { surveyService }        from './survey.service';
 
-import { CrisisCenterComponent }     from './crisis-center.component';
-import { CrisisListComponent }       from './crisis-list.component';
-import { CrisisCenterHomeComponent } from './crisis-center-home.component';
-import { CrisisDetailComponent }     from './crisis-detail.component';
+import { surveyCenterComponent }     from './survey-center.component';
+import { surveyListComponent }       from './survey-list.component';
+import { surveyCenterHomeComponent } from './survey-center-home.component';
+import { surveyDetailComponent }     from './survey-detail.component';
 
-import { CrisisCenterRoutingModule } from './crisis-center-routing.module';
+import { surveyCenterRoutingModule } from './survey-center-routing.module';
 export class AnswerSet
 {
     SurveyName:string;
@@ -56,20 +56,20 @@ export class ResponseSet{
   imports: [
     CommonModule,
     FormsModule,
-    CrisisCenterRoutingModule,
+    surveyCenterRoutingModule,
     ReactiveFormsModule
   ],
   declarations: [
-    CrisisCenterComponent,
-    CrisisListComponent,
-    CrisisCenterHomeComponent,
-    CrisisDetailComponent
+    surveyCenterComponent,
+    surveyListComponent,
+    surveyCenterHomeComponent,
+    surveyDetailComponent
   ],
   providers: [
-    CrisisService
+    surveyService
   ]
 })
-export class CrisisCenterModule {
+export class surveyCenterModule {
 
   
 }

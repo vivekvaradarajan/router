@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { slideInDownAnimation } from '../animations';
 
 import { Hero, HeroService }  from './hero.service';
-import {SurveyAnswer} from '../crisis-center/SurveyAnswer';
+import {SurveyAnswer} from '../survey-center/SurveyAnswer';
 
 @Component({
   template: `

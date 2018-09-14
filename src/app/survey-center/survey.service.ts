@@ -215,13 +215,13 @@ import { Router } from '@angular/router';
 
 
 @Injectable()
-export class CrisisService {
+export class surveyService {
   private surveyUrl = 'api/surveys';  // URL to web api
   
   constructor(
     private http: HttpClient, private router: Router) { }
-  static nextCrisisId = 100;
-  // private crises$: BehaviorSubject<Crisis[]> = new BehaviorSubject<Crisis[]>(CRISES);
+  static nextsurveyId = 100;
+  // private crises$: BehaviorSubject<survey[]> = new BehaviorSubject<survey[]>(CRISES);
   private surveys$: BehaviorSubject<Survey[]> = new BehaviorSubject<Survey[]>(surveys);
   private answers$:BehaviorSubject<SurveyAnswer[]> = new BehaviorSubject<SurveyAnswer[]>(Answers);
 
@@ -232,9 +232,9 @@ export class CrisisService {
     return this.answers$;
   }
 
-  getCrisis(id: number | string) {
+  getsurvey(id: number | string) {
     return this.getCrises().pipe(
-      map(crises => crises.find(crisis => crisis.Id === +id))
+      map(crises => crises.find(survey => survey.Id === +id))
     );
   }
 
@@ -242,18 +242,18 @@ export class CrisisService {
     console.log(surveyAnswer);
     Answers.push(surveyAnswer);
 
-    this.router.navigateByUrl('crisis-center/haa/'+surveyAnswer.SurveyId); 
+    this.router.navigateByUrl('survey-center/haa/'+surveyAnswer.SurveyId); 
 
     // return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
     //   tap(_ => this.log(`updated SurveyAnswer id=${surveyAnswer.SurveyId}`)),
     //   catchError(this.handleError<any>('updatequestionnaire'))
     // );
   }
-  // addCrisis(name: string) {
+  // addsurvey(name: string) {
   //   name = name.trim();
   //   if (name) {
-  //     let crisis = new Crisis(CrisisService.nextCrisisId++, name);
-  //     CRISES.push(crisis);
+  //     let survey = new survey(surveyService.nextsurveyId++, name);
+  //     CRISES.push(survey);
   //     this.crises$.next(CRISES);
   //   }
   // }

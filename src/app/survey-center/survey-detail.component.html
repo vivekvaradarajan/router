@@ -1,4 +1,4 @@
-<div *ngIf="crisis" style="clear:both;">
+<div *ngIf="survey" style="clear:both;">
     <div>
         <h3>Patient Information:</h3>
         <div>
@@ -19,7 +19,7 @@
         </div>       
     </div>
       <ul class="questions">
-        <li *ngFor="let section of crisis.Sections;let i = index;">
+        <li *ngFor="let section of survey.Sections;let i = index;">
         <div style="clear:both;">
         <h2>{{section.Title}}</h2>              
         <div>

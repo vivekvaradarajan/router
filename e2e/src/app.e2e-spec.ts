@@ -13,17 +13,17 @@ describe('Router', () => {
 
   function getPageStruct() {
     const hrefEles = element.all(by.css('app-root > nav a'));
-    const crisisDetail = element.all(by.css('app-root > ng-component > ng-component > ng-component > div')).first();
+    const surveyDetail = element.all(by.css('app-root > ng-component > ng-component > ng-component > div')).first();
     const heroDetail = element(by.css('app-root > ng-component > div'));
 
     return {
       hrefs: hrefEles,
       activeHref: element(by.css('app-root > nav a.active')),
 
-      crisisHref: hrefEles.get(0),
-      crisisList: element.all(by.css('app-root > ng-component > ng-component li')),
-      crisisDetail: crisisDetail,
-      crisisDetailTitle: crisisDetail.element(by.xpath('*[1]')),
+      surveyHref: hrefEles.get(0),
+      surveyList: element.all(by.css('app-root > ng-component > ng-component li')),
+      surveyDetail: surveyDetail,
+      surveyDetailTitle: surveyDetail.element(by.xpath('*[1]')),
 
       heroesHref: hrefEles.get(1),
       heroesList: element.all(by.css('app-root > ng-component li')),
@@ -46,7 +46,7 @@ describe('Router', () => {
   it('has expected dashboard tabs', () => {
     const page = getPageStruct();
     expect(page.hrefs.count()).toEqual(numDashboardTabs, 'dashboard tab count');
-    expect(page.crisisHref.getText()).toEqual('Crisis Center');
+    expect(page.surveyHref.getText()).toEqual('survey Center');
     expect(page.heroesHref.getText()).toEqual('Heroes');
     expect(page.adminHref.getText()).toEqual('Admin');
     expect(page.loginHref.getText()).toEqual('Login');
@@ -60,9 +60,9 @@ describe('Router', () => {
 
   it('has crises center items', async () => {
     const page = getPageStruct();
-    await page.crisisHref.click();
-    expect(page.activeHref.getText()).toEqual('Crisis Center');
-    expect(page.crisisList.count()).toBe(numCrises, 'crisis list count');
+    await page.surveyHref.click();
+    expect(page.activeHref.getText()).toEqual('survey Center');
+    expect(page.surveyList.count()).toBe(numCrises, 'survey list count');
   });
 
   it('has hero items', async () => {
@@ -74,25 +74,25 @@ describe('Router', () => {
 
   it('toggles views', async () => {
     const page = getPageStruct();
-    await page.crisisHref.click();
-    expect(page.activeHref.getText()).toEqual('Crisis Center');
-    expect(page.crisisList.count()).toBe(numCrises, 'crisis list count');
+    await page.surveyHref.click();
+    expect(page.activeHref.getText()).toEqual('survey Center');
+    expect(page.surveyList.count()).toBe(numCrises, 'survey list count');
     await page.heroesHref.click();
     expect(page.activeHref.getText()).toEqual('Heroes');
     expect(page.heroesList.count()).toBe(numHeroes, 'hero list count');
   });
 
-  it('saves changed crisis details', async () => {
+  it('saves changed survey details', async () => {
     const page = getPageStruct();
-    await page.crisisHref.click();
-    await crisisCenterEdit(2, true);
+    await page.surveyHref.click();
+    await surveyCenterEdit(2, true);
   });
 
   // TODO: Figure out why this test is failing now
-  xit('can cancel changed crisis details', async () => {
+  xit('can cancel changed survey details', async () => {
     const page = getPageStruct();
-    await page.crisisHref.click();
-    await crisisCenterEdit(3, false);
+    await page.surveyHref.click();
+    await surveyCenterEdit(3, false);
   });
 
   it('saves changed hero details', async () => {
@@ -123,7 +123,7 @@ describe('Router', () => {
     await page.loginButton.click();
     const list = page.adminPreloadList;
     expect(list.count()).toBe(1, 'preloaded module');
-    expect(await list.first().getText()).toBe('crisis-center', 'first preloaded module');
+    expect(await list.first().getText()).toBe('survey-center', 'first preloaded module');
   });
 
   it('sees the secondary route', async () => {
@@ -133,30 +133,30 @@ describe('Router', () => {
     expect(page.outletComponents.count()).toBe(2, 'route count');
   });
 
-  async function crisisCenterEdit(index: number, save: boolean) {
+  async function surveyCenterEdit(index: number, save: boolean) {
     const page = getPageStruct();
-    await page.crisisHref.click();
-    let crisisEle = page.crisisList.get(index);
-    let text = await crisisEle.getText();
-    expect(text.length).toBeGreaterThan(0, 'crisis item text length');
+    await page.surveyHref.click();
+    let surveyEle = page.surveyList.get(index);
+    let text = await surveyEle.getText();
+    expect(text.length).toBeGreaterThan(0, 'survey item text length');
     // remove leading id from text
-    const crisisText = text.substr(text.indexOf(' ')).trim();
+    const surveyText = text.substr(text.indexOf(' ')).trim();
 
-    await crisisEle.click();
-    expect(page.crisisDetail.isPresent()).toBe(true, 'crisis detail present');
-    expect(page.crisisDetailTitle.getText()).toContain(crisisText);
-    let inputEle = page.crisisDetail.element(by.css('input'));
+    await surveyEle.click();
+    expect(page.surveyDetail.isPresent()).toBe(true, 'survey detail present');
+    expect(page.surveyDetailTitle.getText()).toContain(surveyText);
+    let inputEle = page.surveyDetail.element(by.css('input'));
     await inputEle.sendKeys('-foo');
 
-    let buttonEle = page.crisisDetail.element(by.buttonText(save ? 'Save' : 'Cancel'));
+    let buttonEle = page.surveyDetail.element(by.buttonText(save ? 'Save' : 'Cancel'));
     await buttonEle.click();
-    crisisEle = page.crisisList.get(index);
+    surveyEle = page.surveyList.get(index);
     if (save) {
-      expect(crisisEle.getText()).toContain(crisisText + '-foo');
+      expect(surveyEle.getText()).toContain(surveyText + '-foo');
     } else {
       await browser.wait(EC.alertIsPresent(), 4000);
       await browser.switchTo().alert().accept();
-      expect(crisisEle.getText()).toContain(crisisText);
+      expect(surveyEle.getText()).toContain(surveyText);
     }
   }
 

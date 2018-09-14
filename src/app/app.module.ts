@@ -19,7 +19,7 @@ import { PageNotFoundComponent }   from './not-found.component';
 
 
 import { DialogService }           from './dialog.service';
-import { CrisisDetailComponent } from './crisis-center/crisis-detail.component';
+import { surveyDetailComponent } from './survey-center/survey-detail.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
