@@ -1,4 +1,23 @@
 <div *ngIf="crisis" style="clear:both;">
+    <div>
+        <h3>Patient Information:</h3>
+        <div>
+            <label>First Name:</label>
+             <input  type="text" [(ngModel)]="surveyAnswer.Patient.FirstName" placeholder="" />
+        </div>
+        <div>
+            <label>Last Name:</label>
+            <input  type="text" [(ngModel)]="surveyAnswer.Patient.LastName" placeholder="" />
+        </div>
+        <div>
+            <label>Gender:</label>
+            <input  type="text" [(ngModel)]="surveyAnswer.Patient.Gender" placeholder="" />
+        </div>
+        <div>
+            <label>Grade:</label>
+            <input  type="text" [(ngModel)]="surveyAnswer.Patient.Grade" placeholder="" />
+        </div>       
+    </div>
       <ul class="questions">
         <li *ngFor="let section of crisis.Sections;let i = index;">
         <div style="clear:both;">

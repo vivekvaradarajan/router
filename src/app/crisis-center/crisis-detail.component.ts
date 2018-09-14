@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@an
 import { SurveyAnswer } from './SurveyAnswer';
 import { SectionAnswer } from './SectionAnswer';
 import { Location } from '@angular/common';
+import { Patient } from './patient';
 @Component({
   templateUrl:'./crisis-detail.component.html',
   styles: ['input {width: 20em}'],
@@ -24,6 +25,8 @@ export class CrisisDetailComponent implements OnInit {
   editName: string;
   title:string;
   surveyAnswer:SurveyAnswer;
+  patient:Patient;
+
    
 
   constructor(
@@ -76,7 +79,10 @@ export class CrisisDetailComponent implements OnInit {
       
       this.surveyAnswer =  {
         SurveyId:this.crisis.Id,
-        SectionAnswers:sectionAnswers
+        SectionAnswers:sectionAnswers,
+        Patient:new Patient(0,"","","",""),
+        InterviewDate:new Date(),
+        Interviewee:""
       }; 
   }
   cancel() {
@@ -92,7 +98,7 @@ export class CrisisDetailComponent implements OnInit {
 
       // let surveyId = this.surveyAnswer.SurveyId;
       // this.router.navigate(['/hero/{id}', { id: surveyId, foo: 'foo' }]); 
-
+     console.log(JSON.stringify(this.surveyAnswer));
      this.crisisService.saveAnswer(this.surveyAnswer);
   }
   goBack(): void {
