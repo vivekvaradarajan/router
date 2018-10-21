@@ -267,8 +267,8 @@ export class surveyService {
     console.log(surveyAnswer);
     Answers.push(surveyAnswer);
     this.savePatient(surveyAnswer.Patient)
-    .subscribe(patient => console.log('result'+patient));
-    this.router.navigateByUrl('survey-center/haa/'+surveyAnswer.SurveyId); 
+    .subscribe(patient => console.log('result',patient));
+    //this.router.navigateByUrl('survey-center/haa/'+surveyAnswer.SurveyId); 
 
     // return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
     //   tap(_ => this.log(`updated SurveyAnswer id=${surveyAnswer.SurveyId}`)),
