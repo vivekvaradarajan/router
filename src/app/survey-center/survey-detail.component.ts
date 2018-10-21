@@ -38,9 +38,7 @@ export class surveyDetailComponent implements OnInit {
     private location:Location
   ) {
     router.events.forEach((event) => {
-      if(event instanceof RoutesRecognized) {
-        this.createSurveyAnswer();
-      }
+
     });
   }
   
@@ -80,7 +78,7 @@ export class surveyDetailComponent implements OnInit {
       this.surveyAnswer =  {
         SurveyId:this.survey.Id,
         SectionAnswers:sectionAnswers,
-        Patient:new Patient(0,"","","",""),
+        Patient:new Patient(0,"","","","",""),
         InterviewDate:new Date(),
         Interviewee:""
       }; 
