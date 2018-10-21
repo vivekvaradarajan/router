@@ -1,13 +1,14 @@
 import { BehaviorSubject } from 'rxjs';
 import {SurveyAnswer} from './SurveyAnswer';
 import {SectionAnswer} from './SectionAnswer';
+import {Patient} from './patient';
 import {Answer} from './Answer';
 import{Control} from './Control';
+import {catchError,retry,map,tap} from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
  
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, of ,throwError} from 'rxjs';
 
 export class Response{
   constructor(public Label:string, public Type:string,public Id:number,public UserName:string){}
@@ -217,6 +218,8 @@ import { Router } from '@angular/router';
 @Injectable()
 export class surveyService {
   private surveyUrl = 'api/surveys';  // URL to web api
+
+  private riscUrl = 'http://risc-api20180802104103.azurewebsites.net/api/Survey/';
   
   constructor(
     private http: HttpClient, private router: Router) { }
@@ -225,7 +228,36 @@ export class surveyService {
   private surveys$: BehaviorSubject<Survey[]> = new BehaviorSubject<Survey[]>(surveys);
   private answers$:BehaviorSubject<SurveyAnswer[]> = new BehaviorSubject<SurveyAnswer[]>(Answers);
 
-  getCrises() { return this.surveys$; }
+  getSurveys():Observable<Survey[]>{
+    console.log("inside get surveys of servey service");
+    return this.http.post<Survey[]>(this.riscUrl+'SurveyConfiguration', {"ProgramId":10001}, httpOptions)
+    .pipe(
+      catchError(this.handleError('get surveyss',surveys))
+    );
+  }
+
+  getnoSurveys(){
+    console.log("inside no get surveys of servey service");
+    return this.http.post<Survey[]>(this.riscUrl+'SurveyConfiguration', {"ProgramId":10001}, httpOptions)
+    .pipe(
+      catchError(this.handleError('get surveyss',surveys))
+    );
+  }
+
+  // getCrises() { 
+  //   return this.http.post<[Survey]>(this.riscUrl+'SurveyConfiguration', {"ProgramId":10001}, httpOptions)
+  //   .subscribe(
+  //     data =>{
+  //       console.log("get surveys",data);
+  //     },
+  //     error=>{
+  //       console.log("Error on getting surveys",error);
+  //     }
+  //   );
+
+    //return this.surveys$; 
+  
+
 
   getAnswers() {
     console.log(this.answers$);
@@ -233,14 +265,22 @@ export class surveyService {
   }
 
   getsurvey(id: number | string) {
-    return this.getCrises().pipe(
+    return this.getSurveys().pipe(
       map(crises => crises.find(survey => survey.Id === +id))
     );
   }
 
+  savePatient(patient:Patient):Observable<Patient>{
+    return this.http.post<Patient>(this.riscUrl+'CreatPatient', patient, httpOptions)
+    .pipe(
+      catchError(this.handleError('savePatient',patient))
+    );
+  }
   saveAnswer (surveyAnswer:SurveyAnswer){
     console.log(surveyAnswer);
     Answers.push(surveyAnswer);
+    this.savePatient(surveyAnswer.Patient)
+    .subscribe(patient => console.log('result'+patient));
 
     this.router.navigateByUrl('survey-center/haa/'+surveyAnswer.SurveyId); 
 
