@@ -1,6 +1,6 @@
 <div *ngIf="survey" style="clear:both;">
-    <div >
-        <h3>Patient Information:</h3>
+    <div>
+        <h4>Patient Information:</h4>
         <div class="row">
             <div class="col-md-6">
                 <label>First Name:</label>
@@ -31,22 +31,26 @@
       <ul class="questions">
         <li *ngFor="let section of survey.Sections;let i = index;">
         <div style="clear:both;">
-        <h2>{{section.Title}}</h2>              
+        <h4 style="margin-top:40px;">{{section.Title}}</h4>              
         <div>
-            <ul >
-                <li class="prompt" *ngFor="let prompt of section.Prompts;let j = index;">
+            <ul class="q-list">
+                <li  *ngFor="let prompt of section.Prompts;let j = index;">
                     <div style="clear:both;">
-                    <h3>Question {{j +1}}:</h3>
-                    <p>{{prompt.PromptText }}  </p>
-                    <div style="clear:both;overflow:hidden;">
-                    <div class ="textbox"  *ngFor="let response of prompt.ResponseSet;let k=index;">               
-                        <div class="q" style="min-width:600px;" *ngIf="response.Type == 'text'">
-                            <input style="width:90%;" type="text" [(ngModel)]="surveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value" placeholder="" />
+                    <h5>Question {{j +1}}:</h5>
+                    <div class="row">
+                    <div class="col-md-10">
+                     <p>{{prompt.PromptText }}  </p>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-10" [hidden]="response.Type != 'text'"  *ngFor="let response of prompt.ResponseSet;let k=index;">               
+                        <div class="q" style="min-width:600px;" [hidden]="response.Type != 'text'">
+                            <input  type="text" class="form-control" [(ngModel)]="surveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value" placeholder="" />
                         </div>        
                     </div>
-                    <div class="checkboxgroup">
+                    <div class="col-md-2" >
                         <div class="checkbox" *ngFor="let response of prompt.ResponseSet;let k=index;">                                  
-                            <div class="q" *ngIf="response.Type == 'checkbox'">
+                            <div class="q" [hidden]="response.Type != 'checkbox'">
                                 <input type="checkbox"  [(ngModel)]="surveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value"  />
                                 <label>{{response.Label}}</label>
                             </div>
