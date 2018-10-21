@@ -24,10 +24,11 @@ export class surveyListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("survey list is initaited");
     this.surveys$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.selectedId = +params.get('id');
-        return this.service.getCrises();
+        return this.service.getnoSurveys();
       })
     );
   }

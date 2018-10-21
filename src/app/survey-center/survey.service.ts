@@ -3,6 +3,7 @@ import {SurveyAnswer} from './SurveyAnswer';
 import {SectionAnswer} from './SectionAnswer';
 import {Answer} from './Answer';
 import{Control} from './Control';
+import {Patient} from './patient';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
  
@@ -217,6 +218,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class surveyService {
   private surveyUrl = 'api/surveys';  // URL to web api
+  private riscUrl = 'http://risc-api20180802104103.azurewebsites.net/api/Survey/';
   
   constructor(
     private http: HttpClient, private router: Router) { }
@@ -233,15 +235,39 @@ export class surveyService {
   }
 
   getsurvey(id: number | string) {
-    return this.getCrises().pipe(
+    return this.getSurveys().pipe(
       map(crises => crises.find(survey => survey.Id === +id))
+    );
+  }
+
+  getSurveys():Observable<Survey[]>{
+    console.log("inside get surveys of servey service");
+    return this.http.post<Survey[]>(this.riscUrl+'SurveyConfiguration', {"ProgramId":10001}, httpOptions)
+    .pipe(
+      catchError(this.handleError('get surveyss',surveys))
+    );
+  }
+
+  getnoSurveys(){
+    console.log("inside no get surveys of servey service");
+    return this.http.post<Survey[]>(this.riscUrl+'SurveyConfiguration', {"ProgramId":10001}, httpOptions)
+    .pipe(
+      catchError(this.handleError('get surveyss',surveys))
+    );
+  }
+
+  savePatient(patient:Patient):Observable<Patient>{
+    return this.http.post<Patient>(this.riscUrl+'CreatPatient', patient, httpOptions)
+    .pipe(
+      catchError(this.handleError('savePatient',patient))
     );
   }
 
   saveAnswer (surveyAnswer:SurveyAnswer){
     console.log(surveyAnswer);
     Answers.push(surveyAnswer);
-
+    this.savePatient(surveyAnswer.Patient)
+    .subscribe(patient => console.log('result'+patient));
     this.router.navigateByUrl('survey-center/haa/'+surveyAnswer.SurveyId); 
 
     // return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
