@@ -48,20 +48,18 @@ export class surveyCenterHomeComponent implements OnInit {
       this.answers = c as SurveyAnswer[]
     });
 
+   this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.selectedId = +params.get('id');
+        var test = this.service.getCrises();
+        console.log(test);
+        return test;
+      })
+    ).subscribe(c=>{
+      this.surveys = c as Survey[]
+    });
 
-  this.service.getSurveys()
-  .subscribe((data) => {
-    console.log("get servey center")
-    console.log(data)
-   this.surveys=data;
-
-   console.log(data);
-   console.log(this.surveys);
-   this.survey = this.surveys.filter(x => x.Id == this.selectedId)[0];
-  }
-   );
-
-  
+    this.survey = this.surveys.filter(x => x.Id == this.selectedId)[0];
 
   }
 }
