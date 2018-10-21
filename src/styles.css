@@ -1,4 +1,5 @@
 /* Master Styles */
+@import "~bootstrap/dist/css/bootstrap.css";
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;
@@ -23,13 +24,7 @@ h1 {
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     margin-bottom:10px;
 }
-.row{
-  clear:both;
-}
-.col-md-6{
-  width:45%;
-  float:left;
-}
+
 h2, h3 {
   color: #444;
   font-family: Arial, Helvetica, sans-serif;
@@ -109,6 +104,14 @@ nav a.active {
   list-style:none;
   padding:0;
 }
+.prompt p{
+  width:540px;
+  
+  padding-left:30px;
+}
+.prompt .textbox{
+  padding-left:30px;
+}
 .q input[type='checkbox']{
 width:15px;
 }
@@ -142,7 +145,7 @@ body{
 }
 .main-body{
   background: #fff;
-  width: 86%;
+  width: 80%;
   margin: auto;
   margin-top: 20px;
   border-radius: 7px;
