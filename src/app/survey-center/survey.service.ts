@@ -4,6 +4,7 @@ import {SectionAnswer} from './SectionAnswer';
 import {Answer} from './Answer';
 import{Control} from './Control';
 import {Patient} from './patient';
+import {PatientResponse} from './patientResponse';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
  
@@ -27,6 +28,7 @@ const httpOptions = {
 };
 
 const surveys =[];
+const patientResponse = new PatientResponse(false,"",0);
 
 
 const Answers =[];
@@ -72,10 +74,10 @@ export class surveyService {
     );
   }
 
-  savePatient(patient:Patient):Observable<Patient>{
-    return this.http.post<Patient>(this.riscUrl+'CreatPatient', patient, httpOptions)
+  savePatient(patient:Patient):Observable<PatientResponse>{
+    return this.http.post<PatientResponse>(this.riscUrl+'CreatePatient', patient, httpOptions)
     .pipe(
-      catchError(this.handleError('savePatient',patient))
+      catchError(this.handleError('savePatient',patientResponse))
     );
   }
 

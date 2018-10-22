@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../survey-center/patient';
+import {PatientResponse} from '../survey-center/patientResponse';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {surveyService} from '../survey-center/survey.service';
@@ -22,12 +23,17 @@ export class AddRiscComponent implements OnInit {
     this.patient = new Patient(0,"","","","","");
   }
 
-  savePatient(patient:Patient){
-    this.service.savePatient(patient)
-    .subscribe(patient => console.log('result',patient));
-    
-    let id = 122;
+  savePatient(response:PatientResponse){
+    this.service.savePatient(this.patient)
+    .subscribe((response) => { 
+      console.log('result',response);
+      console.log(response.UserData);
+      let id = response.UserData;
     this.router.navigate(['/survey-center', { id: id}]);
+  });
+    
+   // console.log(response.UserData);
+    
   }
 
   
