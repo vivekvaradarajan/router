@@ -20,6 +20,7 @@ import { PageNotFoundComponent }   from './not-found.component';
 import { DialogService }           from './dialog.service';
 import { surveyDetailComponent } from './survey-center/survey-detail.component';
 import { CommonModule } from '@angular/common';
+import { AddRiscComponent } from './add-risc/add-risc.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { CommonModule } from '@angular/common';
     AppComponent,
     ComposeMessageComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddRiscComponent
   ],
   providers: [
     DialogService

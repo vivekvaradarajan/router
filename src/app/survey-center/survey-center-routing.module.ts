@@ -5,6 +5,7 @@ import { surveyCenterHomeComponent } from './survey-center-home.component';
 import { surveyListComponent }       from './survey-list.component';
 import { surveyCenterComponent }     from './survey-center.component';
 import { surveyDetailComponent }     from './survey-detail.component';
+import {AddRiscComponent} from '../add-risc/add-risc.component';
 
 import { CanDeactivateGuard }     from '../can-deactivate-guard.service';
 import { surveyDetailResolver }   from './survey-detail-resolver.service';

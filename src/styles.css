@@ -84,6 +84,12 @@ nav a:hover {
   color:black;
 
 }
+.btn-risc{
+  font-size:12px;
+  background-color:#408AE1;
+  width:160px;
+  padding:10px;
+}
 nav a.active {
  color:black;
  border-bottom: #408AE1 solid 4px;
@@ -152,13 +158,22 @@ body{
   background:#F8F8F8;
   margin:0;
 }
+.patient-info{
+  width:70%;
+  margin:20px auto;
+}
+.patient-info .col-md-4{
+  text-transform: uppercase;
+  margin-top: 8px;
+  font-weight: bold;
+}
 .main-body{
   background: #fff;
   width: 80%;
   margin: auto;
   margin-top: 20px;
   border-radius: 7px;
-  padding: 20px;
+  /* padding: 20px; */
   -webkit-box-shadow: -4px 11px 34px -5px lightgrey;
 -moz-box-shadow: -4px 11px 34px -5px lightgrey;
 box-shadow: -4px 11px 34px -5px lightgrey;

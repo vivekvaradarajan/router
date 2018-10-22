@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ComposeMessageComponent }  from './compose-message.component';
 import { PageNotFoundComponent }    from './not-found.component';
+import {AddRiscComponent} from './add-risc/add-risc.component';
 
 import { CanDeactivateGuard }       from './can-deactivate-guard.service';
 import { AuthGuard }                from './auth-guard.service';
@@ -13,6 +14,10 @@ const appRoutes: Routes = [
     path: 'survey-center',
     loadChildren: 'app/survey-center/survey-center.module#surveyCenterModule',
     data: { preload: true }
+  },
+  {
+    path:'add',
+    component:AddRiscComponent
   },
   { path: '',   redirectTo: '/survey-center/10002', pathMatch: 'full' },
  // {path:'survey-center', redirectTo:'survey-center/10002'},

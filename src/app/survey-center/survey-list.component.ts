@@ -7,11 +7,13 @@ import { switchMap }             from 'rxjs/operators';
 
 @Component({
   template: `
+  <div style="padding:20px;">
     <nav class="sub-menu" >
       <a *ngFor="let survey of surveys$ | async" [routerLink]="[survey.Id]" [class.selected]="survey.Id === selectedId" routerLinkActive="active">{{survey.SurveyName}}</a>
     </nav>
 
     <router-outlet></router-outlet>
+    </div>
   `
 })
 export class surveyListComponent implements OnInit {

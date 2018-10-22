@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
       <a href="">DASHBOARD</a>
       <a routerLink="/survey-center" routerLinkActive="active">RISC</a>
       <a href="">ANALYTICS</a>
+      <a style="  float:right;" class="btn btn-primary btn-risc" routerLink="/add">ADD RISC</a>
     </nav>
     <div class="main-body">
     <router-outlet></router-outlet>
