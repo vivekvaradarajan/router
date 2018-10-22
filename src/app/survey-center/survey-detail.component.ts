@@ -64,6 +64,7 @@ export class surveyDetailComponent implements OnInit {
         this.editName = data.survey.SurveyName;
         this.survey = data.survey;
         this.title = data.survey.SurveyTitle;
+        console.log(this.survey);
        
       });
 

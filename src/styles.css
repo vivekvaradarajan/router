@@ -89,6 +89,8 @@ nav a:hover {
   background-color:#408AE1;
   width:160px;
   padding:10px;
+  color:#fff;
+  text-transform: uppercase;
 }
 nav a.active {
  color:black;

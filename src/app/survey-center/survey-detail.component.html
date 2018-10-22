@@ -18,6 +18,11 @@
                             <input  type="text" class="form-control" [(ngModel)]="surveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value" placeholder="" />
                         </div>        
                     </div>
+                    <div class="col-md-10" [hidden]="response.Type != 'inline_text'"  *ngFor="let response of prompt.ResponseSet;let k=index;">               
+                        <div class="q" style="min-width:400px;" [hidden]="response.Type != 'inline_text'">
+                            <input style="height:40px;width:40%"  type="text" class="form-control" [(ngModel)]="surveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value" placeholder="" />
+                        </div>        
+                    </div>
                     <div class="col-md-2" >
                         <div class="checkbox" *ngFor="let response of prompt.ResponseSet;let k=index;">                                  
                             <div class="q" [hidden]="response.Type != 'checkbox'">
@@ -36,10 +41,7 @@
     </li>
     </ul>
     
-    <!-- <a [routerLink]="['/hero', surveyAnswer.SurveyId]">
-        <span class="badge">{{ surveyAnswer.SurveyId }}</span>This Survey
-      </a> -->
 
-    <button (click)="saveAnswer()">save</button>
+    <button (click)="saveAnswer()"  class="btn btn-risc">save</button>
 </div>
 

@@ -260,8 +260,7 @@ export class surveyService {
   saveAnswer (surveyAnswer:SurveyAnswer){
     console.log(surveyAnswer);
     Answers.push(surveyAnswer);
-    this.savePatient(surveyAnswer.Patient)
-    .subscribe(patient => console.log('result',patient));
+
   }
 
   private log(message: string) {
