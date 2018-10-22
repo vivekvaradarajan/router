@@ -205,11 +205,7 @@ const surveys =[
 ];
 
 
-const Answers =[
-  // new SurveyAnswer(6662,
-  //   [new SectionAnswer("fsdfsdf",[new Answer(435,[new Control(324,"fsdfs")])])]
-  // )
-  ];
+const Answers =[];
 
 import { Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
@@ -226,8 +222,6 @@ export class surveyService {
   // private crises$: BehaviorSubject<survey[]> = new BehaviorSubject<survey[]>(CRISES);
   private surveys$: BehaviorSubject<Survey[]> = new BehaviorSubject<Survey[]>(surveys);
   private answers$:BehaviorSubject<SurveyAnswer[]> = new BehaviorSubject<SurveyAnswer[]>(Answers);
-
-  getCrises() { return this.surveys$; }
 
   getAnswers() {
     console.log(this.answers$);
@@ -268,21 +262,8 @@ export class surveyService {
     Answers.push(surveyAnswer);
     this.savePatient(surveyAnswer.Patient)
     .subscribe(patient => console.log('result',patient));
-    //this.router.navigateByUrl('survey-center/haa/'+surveyAnswer.SurveyId); 
-
-    // return this.http.put(this.surveyUrl, surveyAnswer, httpOptions).pipe(
-    //   tap(_ => this.log(`updated SurveyAnswer id=${surveyAnswer.SurveyId}`)),
-    //   catchError(this.handleError<any>('updatequestionnaire'))
-    // );
   }
-  // addsurvey(name: string) {
-  //   name = name.trim();
-  //   if (name) {
-  //     let survey = new survey(surveyService.nextsurveyId++, name);
-  //     CRISES.push(survey);
-  //     this.crises$.next(CRISES);
-  //   }
-  // }
+
   private log(message: string) {
     console.log('${message}');
    // this.messageService.add(`questionnaireService: ${message}`);

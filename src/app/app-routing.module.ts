@@ -10,16 +10,6 @@ import { SelectivePreloadingStrategy } from './selective-preloading-strategy';
 
 const appRoutes: Routes = [
   {
-    path: 'compose',
-    component: ComposeMessageComponent,
-    outlet: 'popup'
-  },
-  {
-    path: 'admin',
-    loadChildren: 'app/admin/admin.module#AdminModule',
-    canLoad: [AuthGuard]
-  },
-  {
     path: 'survey-center',
     loadChildren: 'app/survey-center/survey-center.module#surveyCenterModule',
     data: { preload: true }

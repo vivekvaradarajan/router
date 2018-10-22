@@ -93,9 +93,6 @@ export class surveyDetailComponent implements OnInit {
   }
 
   saveAnswer(): void {
-
-      // let surveyId = this.surveyAnswer.SurveyId;
-      // this.router.navigate(['/hero/{id}', { id: surveyId, foo: 'foo' }]); 
      console.log(JSON.stringify(this.surveyAnswer));
      this.surveyService.saveAnswer(this.surveyAnswer);
   }
