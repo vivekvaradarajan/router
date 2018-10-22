@@ -9,7 +9,7 @@ import { switchMap }             from 'rxjs/operators';
   template: `
   <div style="padding:20px;">
     <nav class="sub-menu" >
-      <a *ngFor="let survey of surveys$ | async" [routerLink]="[survey.Id]" [class.selected]="survey.Id === selectedId" routerLinkActive="active">{{survey.SurveyName}}</a>
+      <a *ngFor="let survey of surveys$ | async" [routerLink]="[survey.Id]" [queryParams]="{patientId: selectedId}" [class.selected]="survey.Id === selectedId" routerLinkActive="active">{{survey.SurveyName}}</a>
     </nav>
 
     <router-outlet></router-outlet>
@@ -30,6 +30,7 @@ export class surveyListComponent implements OnInit {
     this.surveys$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         this.selectedId = +params.get('id');
+        console.log("This is the patientId:",this.selectedId);
         return this.service.getnoSurveys();
       })
     );

@@ -2,6 +2,8 @@ import { Component, OnInit, HostBinding ,Input,Output} from '@angular/core';
 import { ActivatedRoute, Router,NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized  } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { ParamMap } from '@angular/router';
+
 import { slideInDownAnimation }   from '../animations';
 import { Survey, Section}         from './survey.service';
 import { DialogService }  from '../dialog.service';
@@ -12,6 +14,7 @@ import { SurveyAnswer } from './SurveyAnswer';
 import { SectionAnswer } from './SectionAnswer';
 import { Location } from '@angular/common';
 import { Patient } from './patient';
+import { switchMap }             from 'rxjs/operators';
 @Component({
   templateUrl:'./survey-detail.component.html',
   styles: ['input {width: 20em}'],
@@ -25,7 +28,8 @@ export class surveyDetailComponent implements OnInit {
   editName: string;
   title:string;
   surveyAnswer:SurveyAnswer;
-  patient:Patient;
+  sub;
+  patientId:number;
 
    
 
@@ -47,6 +51,14 @@ export class surveyDetailComponent implements OnInit {
   }
   createSurveyAnswer(){
     this.surveyAnswer = null;
+
+   this.sub = this.route.queryParams
+      .subscribe(params => {
+        this.patientId = +params['patientId'] || 0;
+        console.log("inside survey detail,patient Id is:",this.patientId)
+      });
+
+
     this.route.data
       .subscribe((data: { survey: Survey }) => {
         this.editName = data.survey.SurveyName;
@@ -78,7 +90,7 @@ export class surveyDetailComponent implements OnInit {
       this.surveyAnswer =  {
         SurveyId:this.survey.Id,
         SectionAnswers:sectionAnswers,
-        Patient:new Patient(0,"","","","",""),
+        PatientId:this.patientId ,
         InterviewDate:new Date(),
         Interviewee:""
       }; 

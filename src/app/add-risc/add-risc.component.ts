@@ -3,6 +3,7 @@ import { Patient } from '../survey-center/patient';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {surveyService} from '../survey-center/survey.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-risc',
@@ -15,7 +16,7 @@ import {surveyService} from '../survey-center/survey.service';
 export class AddRiscComponent implements OnInit {
   patient:Patient;
 
-  constructor(private service: surveyService) { }
+  constructor(private service: surveyService,private router: Router) { }
 
   ngOnInit() {
     this.patient = new Patient(0,"","","","","");
@@ -24,6 +25,9 @@ export class AddRiscComponent implements OnInit {
   savePatient(patient:Patient){
     this.service.savePatient(patient)
     .subscribe(patient => console.log('result',patient));
+    
+    let id = 122;
+    this.router.navigate(['/survey-center', { id: id}]);
   }
 
   

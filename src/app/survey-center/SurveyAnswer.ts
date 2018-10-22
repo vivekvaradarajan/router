@@ -4,16 +4,16 @@ import { Patient } from './patient';
 export class SurveyAnswer
 {
     SurveyId:number;
-    Patient:Patient;
+    PatientId:number;
     Interviewee:string;
     InterviewDate:Date;
     SectionAnswers:SectionAnswer[];
     constructor(SurveyId:number,
-        Patient:Patient,Interviewee:string,InterviewDate:Date,
+        PatientId:number,Interviewee:string,InterviewDate:Date,
         SectionAnswers:SectionAnswer[]){
             this.SurveyId = SurveyId;
             this.SectionAnswers = SectionAnswers;
-            this.Patient = Patient;
+            this.PatientId = PatientId;
             this.Interviewee=Interviewee;
             this.InterviewDate = InterviewDate;
         }

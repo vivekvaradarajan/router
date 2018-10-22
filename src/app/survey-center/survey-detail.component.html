@@ -1,37 +1,7 @@
 <div *ngIf="survey" style="clear:both;">
-    <div>
-        <h4>Patient Information:</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <label>First Name:</label>
-                <input class="form-control"  type="text" [(ngModel)]="surveyAnswer.Patient.FirstName" placeholder="" />
-            </div>
-            <div class="col-md-6">
-                <label>Last Name:</label>
-                <input class="form-control"  type="text" [(ngModel)]="surveyAnswer.Patient.LastName" placeholder="" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Date of Birth:</label>
-                <input class="form-control"  type="text" [(ngModel)]="surveyAnswer.Patient.dateOfBirth" placeholder="" />
-            </div>
-            <div class="col-md-6">
-                <label>Gender:</label>
-                <input class="form-control"  type="text" [(ngModel)]="surveyAnswer.Patient.Gender" placeholder="" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Grade:</label>
-                <input class="form-control"  type="text" [(ngModel)]="surveyAnswer.Patient.Grade" placeholder="" />
-            </div>
-        </div>       
-    </div>
       <ul class="questions">
         <li *ngFor="let section of survey.Sections;let i = index;">
-        <div style="clear:both;">
-        <h4 style="margin-top:40px;">{{section.Title}}</h4>              
+        <div style="clear:both;">            
         <div>
             <ul class="q-list">
                 <li  *ngFor="let prompt of section.Prompts;let j = index;">
