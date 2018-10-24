@@ -14,7 +14,8 @@ import { SurveyAnswer } from './SurveyAnswer';
 import { SectionAnswer } from './SectionAnswer';
 import { Location } from '@angular/common';
 import { Patient } from './patient';
-import { switchMap }             from 'rxjs/operators';
+import {User} from './User';
+import { switchMap, ignoreElements }             from 'rxjs/operators';
 @Component({
   templateUrl:'./survey-detail.component.html',
   styles: ['input {width: 20em}'],
@@ -29,9 +30,8 @@ export class surveyDetailComponent implements OnInit {
   title:string;
   surveyAnswer:SurveyAnswer;
   sub;
-  patientId:number;
-
-   
+  user:User; 
+  surveyName;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,11 +51,12 @@ export class surveyDetailComponent implements OnInit {
   }
   createSurveyAnswer(){
     this.surveyAnswer = null;
+    this.user = new User(0,'','',0,0);
 
    this.sub = this.route.queryParams
       .subscribe(params => {
-        this.patientId = +params['patientId'] || 0;
-        console.log("inside survey detail,patient Id is:",this.patientId)
+        this.user.RelatedTo = +params['patientId'] || 0;
+        console.log("inside survey detail,patient Id is:",this.user.RelatedTo);
       });
 
 
@@ -67,6 +68,18 @@ export class surveyDetailComponent implements OnInit {
         console.log(this.survey);
        
       });
+
+      if(this.editName == 'RISC Patient Interview'){
+        this.user.RoleId=60001;
+      }
+
+      if(this.editName == 'RISC Parent/Guardian Interview'){
+        this.user.RoleId = 60002;
+      }
+
+      if(this.editName == 'RISC Provider Interview'){
+        this.user.RoleId = 60003;
+      }
 
       let sectionAnswers=[];
 
@@ -91,9 +104,8 @@ export class surveyDetailComponent implements OnInit {
       this.surveyAnswer =  {
         SurveyId:this.survey.Id,
         SectionAnswers:sectionAnswers,
-        PatientId:this.patientId ,
-        InterviewDate:new Date(),
-        Interviewee:""
+        User:this.user ,
+        InterviewDate:new Date()
       }; 
   }
   cancel() {
@@ -107,7 +119,8 @@ export class surveyDetailComponent implements OnInit {
 
   saveAnswer(): void {
      console.log(JSON.stringify(this.surveyAnswer));
-     this.surveyService.saveAnswer(this.surveyAnswer);
+     this.surveyService.saveAnswer(this.surveyAnswer).subscribe(result => console.log(result));
+     
   }
   goBack(): void {
     console.log("go back");

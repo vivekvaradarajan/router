@@ -1,20 +1,19 @@
 import {SectionAnswer} from './SectionAnswer';
 import { Patient } from './patient';
+import {User} from './User';
 
 export class SurveyAnswer
 {
     SurveyId:number;
-    PatientId:number;
-    Interviewee:string;
+    User:User;
     InterviewDate:Date;
     SectionAnswers:SectionAnswer[];
     constructor(SurveyId:number,
-        PatientId:number,Interviewee:string,InterviewDate:Date,
+        User:User,InterviewDate:Date,
         SectionAnswers:SectionAnswer[]){
             this.SurveyId = SurveyId;
             this.SectionAnswers = SectionAnswers;
-            this.PatientId = PatientId;
-            this.Interviewee=Interviewee;
+            this.User = User;
             this.InterviewDate = InterviewDate;
         }
 }

@@ -11,6 +11,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import {CreateSurveyResponse} from './CreateSurveyResponse';
+
 export class Response{
   constructor(public Label:string, public Type:string,public Id:number,public UserName:string){}
 }
@@ -32,6 +34,7 @@ const patientResponse = new PatientResponse(false,"",0);
 
 
 const Answers =[];
+const createSurveyResponse = new CreateSurveyResponse(false);
 
 import { Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
@@ -81,9 +84,14 @@ export class surveyService {
     );
   }
 
-  saveAnswer (surveyAnswer:SurveyAnswer){
+  saveAnswer (surveyAnswer:SurveyAnswer):Observable<CreateSurveyResponse>{
     console.log(surveyAnswer);
     Answers.push(surveyAnswer);
+
+    return this.http.post<CreateSurveyResponse>(this.riscUrl+'CreateSurvey', surveyAnswer, httpOptions)
+    .pipe(
+      catchError(this.handleError('createSurvey',createSurveyResponse))
+    );
 
   }
 

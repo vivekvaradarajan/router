@@ -40,7 +40,17 @@
     </div>
     </li>
     </ul>
-    
+    <h4>Interviewee Information</h4>
+    <div class ="row" style="margin-bottom:20px;">      
+        <div class="col-4">
+            First Name  <input class="form-control" style="width:80%" type="text" [(ngModel)]="user.FirstName" />
+        </div>
+
+        <div class="col-4">
+            Last Name <input class="form-control"  style="width:80%" type="text" [(ngModel)]="user.LastName" />
+        </div>
+
+    </div>
 
     <button (click)="saveAnswer()"  class="btn btn-risc">save</button>
 </div>
