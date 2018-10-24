@@ -1,8 +1,7 @@
 <div *ngIf="survey" style="clear:both;">
       <ul class="questions">
         <li *ngFor="let section of survey.Sections;let i = index;">
-        <div style="clear:both;">    
-        <p style="font-size:18px;font-style:italic;color:#000;">Section {{i+1}}: {{section.Title}}  </p>     
+        <div style="clear:both;">            
         <div>
             <ul class="q-list">
                 <li  *ngFor="let prompt of section.Prompts;let j = index;">

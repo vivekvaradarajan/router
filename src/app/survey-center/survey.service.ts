@@ -57,7 +57,7 @@ export class surveyService {
 
   getsurvey(id: number | string) {
     return this.getSurveys().pipe(
-      map(data => data.find(survey => survey.Id === +id))
+      map(crises => crises.find(survey => survey.Id === +id))
     );
   }
 
