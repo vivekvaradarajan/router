@@ -16,6 +16,7 @@ import { Location } from '@angular/common';
 import { Patient } from './patient';
 import {User} from './User';
 import { switchMap, ignoreElements }             from 'rxjs/operators';
+import { reject } from 'q';
 @Component({
   templateUrl:'./survey-detail.component.html',
   styles: ['input {width: 20em}'],
@@ -32,6 +33,7 @@ export class surveyDetailComponent implements OnInit {
   sub;
   user:User; 
   surveyName;
+  surveyJson:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,17 +41,72 @@ export class surveyDetailComponent implements OnInit {
     public dialogService: DialogService,
     private surveyService: surveyService,
     private formBuilder:FormBuilder,
-    private location:Location
+    private location:Location,
   ) {
     router.events.forEach((event) => {
 
+    });
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {    
+        
+        this.getSurveyByIdPromise().then(res => this.createSurveyAnswerPromise());
+        //this.createSurveyAnswerPromise().then(res =>  console.log("Route changed",this.survey));
+       // console.log("Route changed",this.survey);
+          // Show loading indicator
+      }    
     });
   }
   
   ngOnInit() {
       this.createSurveyAnswer();
   }
+
+  createSurveyAnswerPromise(){
+    return new Promise((resolve,reject)=>{
+      this.createSurveyAnswer();
+      console.log("in side promise function");
+      resolve();
+    })
+  }
+
+  getSurveyByIdPromise(){
+    return new Promise((resolve,reject)=>{
+      this.getSurveyById();
+      console.log("in side get survey Id promise");
+      resolve()
+    })
+  }
+  getSurveyById(){
+    let id =0;
+    this.sub = this.route.params.subscribe(params => {
+      id = +params['id']; // (+) converts string 'id' to a number    
+   });
+
+   this.surveyService.getsurvey(id).subscribe((result) => {
+     console.log("get survey result",result);
+     this.survey = result;
+     this.title = this.survey.SurveyTitle;
+     this.editName = this.survey.SurveyName;
+    });
+  }
+
+  // getCurrentSurveyPromise(){
+  //   return new Promise((resolve, reject)=>{
+  //     this.route.data
+  //     .subscribe((data: { survey: Survey }) => {
+  //       console.log('get current survey promise');
+  //       this.editName = data.survey.SurveyName;
+  //       this.survey = data.survey;
+  //       this.title = data.survey.SurveyTitle;
+
+  //       resolve(data);
+  //       console.log("current survey is",data.survey);
+  //     });
+  //   })
+  // }
+
   createSurveyAnswer(){
+    console.log("Create survey ANser");
     this.surveyAnswer = null;
     this.user = new User(0,'','',0,0);
 
@@ -60,14 +117,7 @@ export class surveyDetailComponent implements OnInit {
       });
 
 
-    this.route.data
-      .subscribe((data: { survey: Survey }) => {
-        this.editName = data.survey.SurveyName;
-        this.survey = data.survey;
-        this.title = data.survey.SurveyTitle;
-        console.log(this.survey);
-       
-      });
+  
 
       if(this.editName == 'RISC Patient Interview'){
         this.user.RoleId=60001;
@@ -107,6 +157,7 @@ export class surveyDetailComponent implements OnInit {
         User:this.user ,
         InterviewDate:new Date()
       }; 
+      console.log(this.surveyAnswer.SurveyId);
   }
   cancel() {
     this.gotoCrises();
@@ -128,12 +179,10 @@ export class surveyDetailComponent implements OnInit {
   
 
   canDeactivate(): Observable<boolean> | boolean {
-    // Allow synchronous navigation (`true`) if no survey or the survey is unchanged
     if (!this.survey || this.survey.SurveyName === this.editName) {
       return true;
     }
-    // Otherwise ask the user with the dialog service and return its
-    // observable which resolves to true or false when the user decides
+
     return this.dialogService.confirm('Discard changes?');
   }
 

@@ -12,7 +12,7 @@ import { switchMap }             from 'rxjs/operators';
       <a *ngFor="let survey of surveys$ | async" [routerLink]="[survey.Id]" [queryParams]="{patientId: selectedId}" [class.selected]="survey.Id === selectedId" routerLinkActive="active">{{survey.SurveyName}}</a>
     </nav>
 
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="surveyChange()"></router-outlet>
     </div>
   `
 })
@@ -34,5 +34,9 @@ export class surveyListComponent implements OnInit {
         return this.service.getnoSurveys();
       })
     );
+  }
+
+  surveyChange(){
+    console.log("survey changed");
   }
 }

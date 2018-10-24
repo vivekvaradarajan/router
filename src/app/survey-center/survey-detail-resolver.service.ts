@@ -17,6 +17,7 @@ export class surveyDetailResolver implements Resolve<Survey> {
       take(1),
       map(survey => {
         if (survey) {
+          console.log("resolvinggg",survey);
           return survey;
         } else { // id not found
           this.router.navigate(['/survey-center']);
