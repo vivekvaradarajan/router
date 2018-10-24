@@ -5,6 +5,7 @@ import {Answer} from './Answer';
 import{Control} from './Control';
 import {Patient} from './patient';
 import {PatientResponse} from './patientResponse';
+import {Survey} from './Survey';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
  
@@ -13,18 +14,6 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import {CreateSurveyResponse} from './CreateSurveyResponse';
 
-export class Response{
-  constructor(public Label:string, public Type:string,public Id:number,public UserName:string){}
-}
-export class Prompt{
-  constructor(public PromptText:string, public ResponseSet:Response[],public Id:number,public UserName:string){}
-}
-export class Section{
-  constructor(public Title:string,public Description:string,public SubTitle:string,public Order:number,public Prompts:Prompt[]){}
-}
-export class Survey {
-  constructor( public SurveyName: string, public SurveyTitle :string, public Sections:Section[],public Id: number,public UserName:string) { }
-}
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

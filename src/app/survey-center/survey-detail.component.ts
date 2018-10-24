@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { ParamMap } from '@angular/router';
 
 import { slideInDownAnimation }   from '../animations';
-import { Survey, Section}         from './survey.service';
+import {Survey} from './survey';
+import {Section} from './Section';
 import { DialogService }  from '../dialog.service';
 
 import {surveyService} from './survey.service';

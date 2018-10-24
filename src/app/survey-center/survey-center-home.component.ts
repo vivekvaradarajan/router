@@ -3,7 +3,8 @@
 import { Component, OnInit }        from '@angular/core';
 import { ActivatedRoute, ParamMap,Router,NavigationStart, NavigationEnd, NavigationError, NavigationCancel, RoutesRecognized } from '@angular/router';
 
-import { Survey, surveyService } from './survey.service';
+import { surveyService } from './survey.service';
+import {Survey} from './survey';
 import { Observable }            from 'rxjs';
 import { switchMap }             from 'rxjs/operators';
 import {SurveyAnswer} from './SurveyAnswer';
