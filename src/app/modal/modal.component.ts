@@ -24,7 +24,7 @@ export class ModalComponent implements OnInit {
   saveAnswer(): void {
     console.log(JSON.stringify(this.surveyAnswer));
     this.surveyService.saveAnswer(this.surveyAnswer).subscribe(result => console.log(result));
-
+    this.surveyService.updateIsSaved(true);
     this.activeModal.close('Close click');
  }
 

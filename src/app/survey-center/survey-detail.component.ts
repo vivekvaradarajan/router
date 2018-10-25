@@ -59,6 +59,7 @@ export class surveyDetailComponent implements OnInit {
          this.survey = data.survey;
          this.originalSurveyString = JSON.stringify(this.survey);
          this.hasSaved = false;
+         this.surveyService.updateIsSaved(this.hasSaved);
        console.log("inside detail component",this.survey);
     
     });
@@ -86,6 +87,7 @@ export class surveyDetailComponent implements OnInit {
 
   canDeactivate(): Observable<boolean> | boolean {
     // Allow synchronous navigation (`true`) if no survey or the survey is unchanged
+    this.hasSaved = this.surveyService.getIsSaved();
     if (!this.survey || JSON.stringify(this.survey)==this.originalSurveyString || this.hasSaved) {
       console.log("nothing changed");
       return true;
@@ -97,18 +99,11 @@ export class surveyDetailComponent implements OnInit {
 
   gotoCrises() {
     let surveyId = this.survey ? this.survey.Id : null;
-    // Pass along the survey id if available
-    // so that the surveyListComponent can select that survey.
-    // Add a totally useless `foo` parameter for kicks.
-    // Relative navigation back to the crises
     this.router.navigate(['../', { id: surveyId, foo: 'foo' }], { relativeTo: this.route });
   }
 
   open() {
     const modalRef = this.modalService.open(ModalAboutComponent);
     this.surveyService.saveTempAnswer(this.survey.SurveyAnswer);
-   // modalRef.componentInstance.title = 'this is the tilte';
-   // console.log("before saving",this.surveyAnswer);
-   // modalRef.componentInstance.surveyAnswer = this.survey.SurveyAnswer;
   }
 }

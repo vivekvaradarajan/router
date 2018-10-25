@@ -34,6 +34,7 @@ export class surveyService {
   private surveyUrl = 'api/surveys';  // URL to web api
   private riscUrl = 'http://risc-api20180802104103.azurewebsites.net/api/Survey/';
   private tempAnswer;
+  private hasSaved = false;
   
   constructor(
     private http: HttpClient, private router: Router) { }
@@ -57,6 +58,14 @@ export class surveyService {
 
   retrieveTempAnswer():SurveyAnswer{
     return this.tempAnswer;
+  }
+  
+  getIsSaved():boolean{
+    return this.hasSaved;
+  }
+
+  updateIsSaved(isSaved:boolean):void{
+    this.hasSaved = isSaved;
   }
 
   getSurveys():Observable<Survey[]>{
