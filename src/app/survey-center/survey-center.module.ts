@@ -13,6 +13,11 @@ import { surveyCenterHomeComponent } from './survey-center-home.component';
 import { surveyDetailComponent }     from './survey-detail.component';
 
 import { surveyCenterRoutingModule } from './survey-center-routing.module';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalComponent, NgbdModalContent } from '../modal-component';
+import { AppComponent } from '../app.component';
+
 export class AnswerSet
 {
     SurveyName:string;
@@ -57,17 +62,21 @@ export class ResponseSet{
     CommonModule,
     FormsModule,
     surveyCenterRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   declarations: [
     surveyCenterComponent,
     surveyListComponent,
     surveyCenterHomeComponent,
-    surveyDetailComponent
+    surveyDetailComponent,
+    NgbdModalComponent, NgbdModalContent
   ],
   providers: [
     surveyService
-  ]
+  ],
+  entryComponents: [NgbdModalContent],
+
 })
 export class surveyCenterModule {
 

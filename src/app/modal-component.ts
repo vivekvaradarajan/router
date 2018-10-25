@@ -26,7 +26,7 @@ export class NgbdModalContent {
 
 @Component({
   selector: 'ngbd-modal-component',
-  templateUrl: './modal-component.html'
+  template:`<button class="btn btn-lg btn-outline-primary" (click)="open()">Launch demo modal</button>`
 })
 export class NgbdModalComponent {
   constructor(private modalService: NgbModal) {}

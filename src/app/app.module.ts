@@ -33,7 +33,7 @@ import { NgbdModalComponent, NgbdModalContent } from './modal-component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+
   ],
   declarations: [
     AppComponent,
@@ -41,12 +41,12 @@ import { NgbdModalComponent, NgbdModalContent } from './modal-component';
     LoginComponent,
     PageNotFoundComponent,
     AddRiscComponent,
-    NgbdModalComponent, NgbdModalContent
+
   ],
   providers: [
     DialogService
   ],
-  entryComponents: [NgbdModalContent],
+
   bootstrap: [ AppComponent ]
 })
 export class AppModule {

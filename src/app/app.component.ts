@@ -13,7 +13,7 @@ import { Component } from '@angular/core';
     <router-outlet></router-outlet>
     <router-outlet name="popup"></router-outlet>
 
-    <ngbd-modal-component></ngbd-modal-component>
+    
     </div>
   `
 })
