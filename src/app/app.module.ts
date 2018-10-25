@@ -21,6 +21,8 @@ import { DialogService }           from './dialog.service';
 import { surveyDetailComponent } from './survey-center/survey-detail.component';
 import { CommonModule } from '@angular/common';
 import { AddRiscComponent } from './add-risc/add-risc.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalComponent, NgbdModalContent } from './modal-component';
 
 @NgModule({
   imports: [
@@ -30,18 +32,21 @@ import { AddRiscComponent } from './add-risc/add-risc.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   declarations: [
     AppComponent,
     ComposeMessageComponent,
     LoginComponent,
     PageNotFoundComponent,
-    AddRiscComponent
+    AddRiscComponent,
+    NgbdModalComponent, NgbdModalContent
   ],
   providers: [
     DialogService
   ],
+  entryComponents: [NgbdModalContent],
   bootstrap: [ AppComponent ]
 })
 export class AppModule {
