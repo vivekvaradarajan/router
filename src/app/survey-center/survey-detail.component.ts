@@ -17,6 +17,10 @@ import { Location } from '@angular/common';
 import { Patient } from './patient';
 import {User} from './User';
 import { switchMap, ignoreElements }             from 'rxjs/operators';
+import {NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../modal/modal.component';
+import { ModalAboutComponent } from '../modal-about/modal-about.component';
+
 @Component({
   templateUrl:'./survey-detail.component.html',
   styles: ['input {width: 20em}'],
@@ -41,7 +45,8 @@ export class surveyDetailComponent implements OnInit {
     public dialogService: DialogService,
     private surveyService: surveyService,
     private formBuilder:FormBuilder,
-    private location:Location
+    private location:Location,
+    private modalService: NgbModal
   ) {
     router.events.forEach((event) => {
 
@@ -97,5 +102,12 @@ export class surveyDetailComponent implements OnInit {
     // Add a totally useless `foo` parameter for kicks.
     // Relative navigation back to the crises
     this.router.navigate(['../', { id: surveyId, foo: 'foo' }], { relativeTo: this.route });
+  }
+
+  open() {
+    const modalRef = this.modalService.open(ModalAboutComponent);
+    modalRef.componentInstance.title = 'this is the tilte';
+    console.log("before saving",this.surveyAnswer);
+    modalRef.componentInstance.surveyAnswer = this.survey.SurveyAnswer;
   }
 }

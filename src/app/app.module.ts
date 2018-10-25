@@ -21,8 +21,7 @@ import { DialogService }           from './dialog.service';
 import { surveyDetailComponent } from './survey-center/survey-detail.component';
 import { CommonModule } from '@angular/common';
 import { AddRiscComponent } from './add-risc/add-risc.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdModalComponent, NgbdModalContent } from './modal-component';
+
 
 @NgModule({
   imports: [

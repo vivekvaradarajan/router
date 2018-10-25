@@ -14,9 +14,10 @@ import { surveyDetailComponent }     from './survey-detail.component';
 
 import { surveyCenterRoutingModule } from './survey-center-routing.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbdModalComponent, NgbdModalContent } from '../modal-component';
-import { AppComponent } from '../app.component';
+import { ModalComponent } from '../modal/modal.component';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { AboutComponent } from '../about/about.component';
+import { ModalAboutComponent } from '../modal-about/modal-about.component';
 
 export class AnswerSet
 {
@@ -63,19 +64,21 @@ export class ResponseSet{
     FormsModule,
     surveyCenterRoutingModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule.forRoot()
   ],
   declarations: [
     surveyCenterComponent,
     surveyListComponent,
     surveyCenterHomeComponent,
     surveyDetailComponent,
-    NgbdModalComponent, NgbdModalContent
+    ModalComponent,
+    AboutComponent,
+    ModalAboutComponent
   ],
   providers: [
-    surveyService
+    surveyService,NgbActiveModal
   ],
-  entryComponents: [NgbdModalContent],
+  entryComponents: [ModalAboutComponent],
 
 })
 export class surveyCenterModule {
