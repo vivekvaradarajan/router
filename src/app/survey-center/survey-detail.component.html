@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-md-10" [hidden]="response.Type != 'inline_text'"  *ngFor="let response of prompt.ResponseSet;let k=index;">               
                         <div class="q" style="min-width:400px;" [hidden]="response.Type != 'inline_text'">
-                            <input style="height:40px;width:40%"  type="text" class="form-control" [(ngModel)]="survey.SurveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value" placeholder="" />
+                            <input style="padding:inherit;width:40%"  type="text" class="form-control" [(ngModel)]="survey.SurveyAnswer.SectionAnswers[i].Answers[j].Controls[k].Value" placeholder="" />
                         </div>        
                     </div>
                     <div class="col-md-2" >
@@ -42,12 +42,12 @@
     </ul>
     <h4>Interviewee Information</h4>
     <div class ="row" style="margin-bottom:20px;">      
-        <div class="col-4">
-            First Name  <input class="form-control" style="width:80%" type="text" [(ngModel)]="survey.SurveyAnswer.User.FirstName" />
+        <div class="col-4 q">
+            First Name  <input  class="form-control" style="width:80%;padding:inherit;" type="text" [(ngModel)]="survey.SurveyAnswer.User.FirstName" />
         </div>
 
-        <div class="col-4">
-            Last Name <input class="form-control"  style="width:80%" type="text" [(ngModel)]="survey.SurveyAnswer.User.LastName" />
+        <div class="col-4 q">
+            Last Name <input  class="form-control"  style="width:80%;padding:inherit;" type="text" [(ngModel)]="survey.SurveyAnswer.User.LastName" />
         </div>
 
     </div>
