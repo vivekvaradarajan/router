@@ -25,7 +25,7 @@ import { switchMap, ignoreElements }             from 'rxjs/operators';
 export class surveyDetailComponent implements OnInit {
   @HostBinding('@routeAnimation') routeAnimation = true;
   @HostBinding('style.display')   display = 'block';
-
+  originalSurveyString:string;
   survey: Survey;
   editName: string;
   title:string;
@@ -33,6 +33,7 @@ export class surveyDetailComponent implements OnInit {
   sub;
   user:User; 
   surveyName;
+  hasSaved:boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -51,6 +52,8 @@ export class surveyDetailComponent implements OnInit {
     this.route.data
        .subscribe((data: { survey: Survey }) => {        
          this.survey = data.survey;
+         this.originalSurveyString = JSON.stringify(this.survey);
+         this.hasSaved = false;
        console.log("inside detail component",this.survey);
     
     });
@@ -69,7 +72,7 @@ export class surveyDetailComponent implements OnInit {
   saveAnswer(): void {
      console.log(JSON.stringify(this.surveyAnswer));
      this.surveyService.saveAnswer(this.surveyAnswer).subscribe(result => console.log(result));
-     
+     this.hasSaved = true;
   }
   goBack(): void {
     console.log("go back");
@@ -78,12 +81,13 @@ export class surveyDetailComponent implements OnInit {
 
   canDeactivate(): Observable<boolean> | boolean {
     // Allow synchronous navigation (`true`) if no survey or the survey is unchanged
-    if (!this.survey || this.survey.SurveyName === this.editName) {
+    if (!this.survey || JSON.stringify(this.survey)==this.originalSurveyString || this.hasSaved) {
+      console.log("nothing changed");
       return true;
     }
     // Otherwise ask the user with the dialog service and return its
     // observable which resolves to true or false when the user decides
-    return this.dialogService.confirm('Discard changes?');
+    return this.dialogService.confirm('You will be navigated away to another page. Are you sure you want to discard all your unsaved changes?');
   }
 
   gotoCrises() {
