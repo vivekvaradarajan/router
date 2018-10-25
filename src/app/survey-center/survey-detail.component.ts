@@ -106,8 +106,9 @@ export class surveyDetailComponent implements OnInit {
 
   open() {
     const modalRef = this.modalService.open(ModalAboutComponent);
-    modalRef.componentInstance.title = 'this is the tilte';
-    console.log("before saving",this.surveyAnswer);
-    modalRef.componentInstance.surveyAnswer = this.survey.SurveyAnswer;
+    this.surveyService.saveTempAnswer(this.survey.SurveyAnswer);
+   // modalRef.componentInstance.title = 'this is the tilte';
+   // console.log("before saving",this.surveyAnswer);
+   // modalRef.componentInstance.surveyAnswer = this.survey.SurveyAnswer;
   }
 }

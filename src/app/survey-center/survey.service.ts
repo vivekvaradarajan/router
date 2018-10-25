@@ -33,6 +33,7 @@ import { Router } from '@angular/router';
 export class surveyService {
   private surveyUrl = 'api/surveys';  // URL to web api
   private riscUrl = 'http://risc-api20180802104103.azurewebsites.net/api/Survey/';
+  private tempAnswer;
   
   constructor(
     private http: HttpClient, private router: Router) { }
@@ -48,6 +49,14 @@ export class surveyService {
     return this.getSurveys().pipe(
       map(crises => crises.find(survey => survey.Id === +id))
     );
+  }
+
+  saveTempAnswer(surveyAnswer: SurveyAnswer):void{
+    this.tempAnswer = surveyAnswer;
+  }
+
+  retrieveTempAnswer():SurveyAnswer{
+    return this.tempAnswer;
   }
 
   getSurveys():Observable<Survey[]>{
